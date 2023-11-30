@@ -2,7 +2,8 @@
 
 .nav-bar {
   @apply w-[5rem] h-full pt-8 pb-10 bg-theme-light-blue rounded-lg flex flex-col justify-between items-center;
-  @apply tablet:h-[6rem] tablet:w-full tablet:flex-row tablet:px-8
+  @apply tablet:h-[6rem] tablet:w-full tablet:flex-row tablet:px-8;
+  @apply mobile:h-[6rem] mobile:w-full mobile:flex-row mobile:px-3 mobile:rounded-none;
 }
 
 .fill-icon {

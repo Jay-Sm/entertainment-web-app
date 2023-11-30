@@ -1,13 +1,13 @@
 <template>
-  <div class="overflow-x-hidden h-full flex flex-row tablet:flex-col">
-    <div class="h-full pt-6 pl-6 tablet:px-6">
+  <div class="overflow-x-hidden h-full flex flex-row tablet:flex-col mobile:flex-col">
+    <div class="h-full pt-6 pl-6 tablet:px-6 mobile:px-0 mobile:pt-0">
       <div class="h-full pb-24">
         <nav class="nav-bar">
           <router-link to="/">
-            <img class="w-[2rem]" src="./assets/images/logo.svg">
+            <img class="w-[2rem] min-w-[2rem]" src="./assets/images/logo.svg">
           </router-link>
 
-          <ul class="max-w-full flex flex-col tablet:flex-row items-center gap-y-[3rem] tablet:gap-x-[4rem]">
+          <ul class="max-w-full flex flex-col tablet:flex-row mobile:flex-row items-center gap-y-[3rem] tablet:gap-x-[4rem] mobile:w-full mobile:justify-between mobile:px-[2rem]">
             <li>
               <router-link to="/">
                 <svg class="fill-icon" width="392" height="392" viewBox="0 0 392 392" fill="none"
