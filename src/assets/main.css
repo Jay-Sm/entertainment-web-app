@@ -1,0 +1,23 @@
+@import url('nav.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* General */
+:root{
+  @apply text-white
+}
+
+html{
+  @apply h-screen
+}
+
+body {
+  @apply bg-background-dark-blue h-full
+}
+
+#app {
+  @apply h-full
+}

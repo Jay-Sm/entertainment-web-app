@@ -1,0 +1,17 @@
+/* Nav Bar */
+
+.fill-icon {
+  @apply w-[1.5rem] h-[1.5rem] box-border;
+}
+
+.fill-icon rect, .fill-icon path {
+  @apply fill-theme-light-blue2 transition-colors duration-300;
+}
+
+:hover.fill-icon rect, :hover.fill-icon path {
+  @apply fill-theme-logo-red;
+}
+
+.router-link-active rect, .router-link-active path{
+  @apply !fill-[#ffffff]
+}
