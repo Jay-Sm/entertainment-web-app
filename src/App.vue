@@ -1,13 +1,13 @@
 <template>
-  <div class="overflow-x-hidden h-full flex">
-    <div class="h-full pt-6 pl-6">
+  <div class="overflow-x-hidden h-full flex flex-row tablet:flex-col">
+    <div class="h-full pt-6 pl-6 tablet:px-6">
       <div class="h-full pb-24">
-        <nav class="w-[4.5rem] h-full bg-theme-light-blue rounded-lg flex flex-col justify-between items-center pt-8 pb-10">
+        <nav class="nav-bar">
           <router-link to="/">
             <img class="w-[2rem]" src="./assets/images/logo.svg">
           </router-link>
 
-          <ul class="max-w-full flex flex-col items-center gap-y-12">
+          <ul class="max-w-full flex flex-col tablet:flex-row items-center gap-y-[3rem] tablet:gap-x-[4rem]">
             <li>
               <router-link to="/">
                 <svg class="fill-icon" width="392" height="392" viewBox="0 0 392 392" fill="none"
@@ -49,7 +49,7 @@
           </ul>
 
           <div>
-            <div class="w-8 h-8 bg-white rounded-full"></div>
+            <div class="w-8 h-8 bg-white rounded-full breakpointtest"></div>
           </div>
         </nav>
       </div>

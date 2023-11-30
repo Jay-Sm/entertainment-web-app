@@ -1,5 +1,10 @@
 /* Nav Bar */
 
+.nav-bar {
+  @apply w-[5rem] h-full pt-8 pb-10 bg-theme-light-blue rounded-lg flex flex-col justify-between items-center;
+  @apply tablet:h-[6rem] tablet:w-full tablet:flex-row tablet:px-8
+}
+
 .fill-icon {
   @apply w-[1.5rem] h-[1.5rem] box-border;
 }
