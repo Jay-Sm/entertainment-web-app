@@ -1,13 +1,14 @@
 <template>
   <div class="overflow-x-hidden h-full flex flex-row tablet:flex-col mobile:flex-col">
-    <div class="h-full pt-6 pl-6 tablet:px-6 mobile:px-0 mobile:pt-0">
-      <div class="h-full pb-24">
+    <div class="h-full tablet:w-full tablet:h-fit mobile:w-full mobile:h-fit pt-6 pl-6 tablet:px-6 mobile:px-0 mobile:pt-0">
+      <div class="h-full tablet:w-full tablet:h-fit mobile:w-full mobile:h-fit pb-24 tablet:pb-0 mobile:pb-0">
         <nav class="nav-bar">
           <router-link to="/">
             <img class="w-[2rem] min-w-[2rem]" src="./assets/images/logo.svg">
           </router-link>
 
-          <ul class="max-w-full flex flex-col tablet:flex-row mobile:flex-row items-center gap-y-[3rem] tablet:gap-x-[4rem] mobile:w-full mobile:justify-between mobile:px-[2rem]">
+          <ul
+            class="max-w-full flex flex-col tablet:flex-row mobile:flex-row items-center gap-y-[3rem] tablet:gap-x-[4rem] mobile:w-full mobile:justify-between mobile:px-[2rem]">
             <li>
               <router-link to="/">
                 <svg class="fill-icon" width="392" height="392" viewBox="0 0 392 392" fill="none"
@@ -21,8 +22,7 @@
             </li>
             <li>
               <router-link to="/movie">
-                <svg class="fill-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                  viewBox="0 0 16 16">
+                <svg class="fill-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                   <path fill="#000"
                     d="M0 1a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm4 0v6h8V1zm8 8H4v6h8zM1 1v2h2V1zm2 3H1v2h2zM1 7v2h2V7zm2 3H1v2h2zm-2 3v2h2v-2zM15 1h-2v2h2zm-2 3v2h2V4zm2 3h-2v2h2zm-2 3v2h2v-2zm2 3h-2v2h2z" />
                 </svg>
@@ -54,7 +54,9 @@
         </nav>
       </div>
     </div>
-    <router-view></router-view>
+    <div class="w-full mt-6">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 

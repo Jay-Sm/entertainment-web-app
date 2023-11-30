@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("nav.css");
 
 @tailwind base;
@@ -6,8 +7,8 @@
 
 /* General */
 :root {
-  @apply text-white;
-  /* @apply mobile:text-[12px] tablet:text-[13px] small:text-[16px] medium:text-[16px] large:text-[16px] xl:text-[24px] xxl:text-[28px]; */
+  @apply text-white font-outfit;
+  @apply mobile:text-[12px] tablet:text-[13px] small:text-[16px] medium:text-[16px] large:text-[16px] xl:text-[24px] xxl:text-[28px] tv:text-[40px];
 }
 
 html {
@@ -29,6 +30,6 @@ body {
   @apply medium:bg-sky-400;
   @apply large:bg-violet-500;
   @apply xl:bg-orange-500;
-  /* @apply xxl:bg-[#f58080]; */
-  /* @apply tv:bg-white; */
+  @apply xxl:bg-[#f58080];
+  @apply tv:bg-white;
 }
