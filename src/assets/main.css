@@ -35,9 +35,9 @@ body {
 }
 
 .label-movie {
-   @apply border-2 max-w-fit h-fit text-[0.6rem] leading-3 font-medium py-[0.2rem] px-[0.6rem] rounded-lg
+   @apply border-2 max-w-fit h-fit text-[0.6rem] leading-3 font-medium py-[0.2rem] px-[0.6rem] rounded-lg select-none
 }
 
 .label-tv {
-  @apply border-2 max-w-fit h-fit bg-white text-background-dark-blue text-[0.6rem] leading-3 font-medium py-[0.2rem] px-[0.6rem] rounded-lg
+  @apply border-2 max-w-fit h-fit bg-white text-background-dark-blue text-[0.6rem] leading-3 font-medium py-[0.2rem] px-[0.6rem] rounded-lg select-none
 }
