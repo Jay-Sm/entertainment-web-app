@@ -1,6 +1,7 @@
 <template>
   <div class="overflow-x-hidden h-full flex flex-row tablet:flex-col mobile:flex-col">
-    <div class="h-full tablet:w-full tablet:h-fit mobile:w-full mobile:h-fit pt-6 pl-6 tablet:px-6 mobile:px-0 mobile:pt-0">
+    <div
+      class="h-full tablet:w-full tablet:h-fit mobile:w-full mobile:h-fit pt-6 pl-6 tablet:px-6 mobile:px-0 mobile:pt-0">
       <div class="h-full tablet:w-full tablet:h-fit mobile:w-full mobile:h-fit pb-24 tablet:pb-0 mobile:pb-0">
         <nav class="nav-bar">
           <router-link to="/">
@@ -48,14 +49,31 @@
             </li>
           </ul>
 
-          <div>
-            <div class="w-8 h-8 bg-white rounded-full breakpointtest"></div>
-          </div>
+          <router-link class="flex flex-col items-center gap-y-1" to="/login">
+            <div class="w-8 h-8 bg-white rounded-full breakpointtest hover:w-9 hover:h-9 transition-all"></div>
+            <p class="text-sm">Login</p>
+          </router-link>
         </nav>
       </div>
     </div>
     <div class="w-full mt-6">
-      <router-view></router-view>
+      <div class="mt-9 tablet:mt-0 mobile:mt-0 pl-[4rem] tablet:pl-6 tablet:pr-12 mobile:pl-6 mobile:pr-12">
+        <div class="flex flex-row">
+          <button>
+            <svg class="w-[2rem] h-[2rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff"
+              viewBox="0 0 16 16">
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+            </svg>
+          </button>
+          <input
+            class=" w-full bg-transparent ml-5 pb-2 font-light text-2xl placeholder:font-light placeholder:text-2xl placeholder:opacity-70 outline-none focus:border-b focus:border-b-theme-light-blue2"
+            type="text" placeholder="Search for movies or TV series">
+        </div>
+      </div>
+      <div>
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
