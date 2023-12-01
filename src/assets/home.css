@@ -9,7 +9,7 @@
 
 /* Sliders */
 .slide-trending {
-  @apply h-full w-[28.7rem] rounded-lg ml-10 border-2 bg-gray-700 opacity-10 flex flex-col justify-end p-4 animate-pulse;
+  @apply h-full w-[28.7rem] rounded-lg ml-10 flex flex-col justify-end p-4 relative overflow-hidden;
 }
 
 .tile-popular {
