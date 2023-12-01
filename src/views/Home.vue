@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-col">
-    <div class="pl-[4rem]">stuff</div>
+    <div>stuff</div>
   </div>
 </template>
 
