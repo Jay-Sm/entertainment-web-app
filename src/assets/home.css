@@ -1,0 +1,18 @@
+/* Home General */
+.label-movie {
+  @apply border-2 max-w-fit h-fit text-[0.6rem] leading-3 font-medium py-[0.2rem] px-[0.6rem] rounded-lg select-none
+}
+
+.label-tv {
+ @apply border-2 max-w-fit h-fit bg-white text-background-dark-blue text-[0.6rem] leading-3 font-semibold py-[0.2rem] px-[0.6rem] rounded-lg select-none
+}
+
+
+/* Sliders */
+.slide-trending{
+  @apply h-full w-[28.7rem] rounded-lg ml-10 border-2 bg-gray-700 opacity-10 flex flex-col justify-end p-4 animate-pulse
+}
+
+.tile-popular{
+  @apply h-[12rem] w-1/2 rounded-lg border-2 bg-gray-700 opacity-10 flex flex-col justify-end p-4 animate-pulse
+}
