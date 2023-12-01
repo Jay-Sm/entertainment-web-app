@@ -7,7 +7,7 @@
 
 /* General */
 :root {
-  @apply text-white font-outfit;
+  @apply text-white font-outfit font-light;
   @apply mobile:text-[12px] tablet:text-[13px] small:text-[16px] medium:text-[16px] large:text-[16px] xl:text-[24px] xxl:text-[28px] tv:text-[40px];
 }
 
@@ -32,4 +32,12 @@ body {
   @apply xl:bg-orange-500;
   @apply xxl:bg-[#f58080];
   @apply tv:bg-white;
+}
+
+.label-movie {
+   @apply border-2 max-w-fit h-fit text-[0.6rem] leading-3 font-medium py-[0.2rem] px-[0.6rem] rounded-lg
+}
+
+.label-tv {
+  @apply border-2 max-w-fit h-fit bg-white text-background-dark-blue text-[0.6rem] leading-3 font-medium py-[0.2rem] px-[0.6rem] rounded-lg
 }

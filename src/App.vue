@@ -71,7 +71,7 @@
             type="text" placeholder="Search for movies or TV series">
         </div>
       </div>
-      <div class="pl-[4rem]">
+      <div class="pl-[4rem] pr-[5.2rem]">
         <router-view></router-view>
       </div>
     </div>
