@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="w-full mt-6">
-      <div class="mt-9 pr-[11.5rem] tablet:mt-0 mobile:mt-0 pl-[4rem] tablet:pl-6 tablet:pr-12 mobile:pl-6 mobile:pr-12">
+      <div class="mt-9 pr-[8.5rem] tablet:mt-0 mobile:mt-0 pl-[4rem] tablet:pl-6 tablet:pr-12 mobile:pl-6 mobile:pr-12">
         <div class="flex flex-row">
           <button>
             <svg class="w-[2rem] h-[2rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff"
@@ -73,7 +73,7 @@
       </div>
 
 
-      <div class="pl-[4rem] pr-[11.5rem] tablet:px-6 mobile:px-3">
+      <div class="pl-[4rem] pr-[8.5rem] tablet:px-6 mobile:px-3">
         <router-view></router-view>
       </div>
     </div>
