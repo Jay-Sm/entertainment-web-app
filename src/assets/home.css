@@ -12,14 +12,13 @@
   @apply h-full w-[27rem] mobile:w-[20rem] rounded-lg ml-10 flex flex-col justify-end p-4 relative overflow-hidden select-none;
 }
 
-
 .grid-popular {
   @apply mt-5 grid-cols-4 grid-rows-[repeat(2,14rem)];
   display: grid;
   gap: 1rem;
-  grid-template-areas: 
-  "tile1 tile2 tile3 tile3"
-  "tile4 tile4 tile5 tile6";
+  grid-template-areas:
+    "tile1 tile2 tile3 tile3"
+    "tile4 tile4 tile5 tile6";
 }
 
 @media (max-width: 899px) {
@@ -35,7 +34,6 @@
 .tile-popular {
   @apply rounded-lg flex flex-col justify-end p-4 relative select-none overflow-hidden;
 }
-
 
 .tile1 {
   grid-area: tile1;
@@ -56,7 +54,10 @@
   grid-area: tile6;
 }
 
+.rated-container {
+  @apply mt-5 w-full flex flex-row gap-x-4 tablet:flex-col tablet:gap-y-4 mobile:flex-col mobile:gap-y-4;
+}
 
-.tile-rated{
+.tile-rated {
   @apply w-full h-[14rem] rounded-lg flex flex-col justify-end p-4 relative select-none overflow-hidden;
 }

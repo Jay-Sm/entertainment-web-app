@@ -92,7 +92,7 @@
         </div>
 
         <div>
-          <div v-if="topRatedMovies.length !== 3" class="mt-5 w-full flex flex-row gap-x-4">
+          <div v-if="topRatedMovies.length !== 3" class="rated-container">
             <div v-for="(item, i) in [1, 2, 3]" :key="i" class="tile-rated">
               <div
                 class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
@@ -104,7 +104,7 @@
             </div>
           </div>
 
-          <div v-else class="mt-5 w-full flex flex-row gap-x-4">
+          <div v-else class="rated-container">
             <div v-for="(movie, index) in topRatedMovies" :key="index" class="tile-rated">
               <img :src="movie.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
@@ -209,7 +209,7 @@
         </div>
 
         <div>
-          <div v-if="topRatedSeries.length !== 3" class="mt-5 w-full flex flex-row gap-x-4">
+          <div v-if="topRatedSeries.length !== 3" class="rated-container">
             <div v-for="(item, i) in [1, 2, 3]" :key="i" class="tile-rated">
               <div
                 class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
@@ -221,7 +221,7 @@
             </div>
           </div>
 
-          <div v-else class="mt-5 w-full flex flex-row gap-x-4">
+          <div v-else class="rated-container">
             <div v-for="(movie, index) in topRatedSeries" :key="index" class="tile-rated">
               <img :src="movie.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
