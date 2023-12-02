@@ -166,7 +166,7 @@
         </div>
       </div>
 
-      <!-- <div class="mt-12">
+      <div class="mt-12">
         <div class="flex flex-row justify-between max-w-full w-full">
           <h2 class="text-3xl flex flex-row items-end gap-x-4">
             Popular
@@ -178,7 +178,7 @@
           </router-link>
         </div>
 
-        <div v-if="popularMovies.length !== 6" class="grid-popular">
+        <div v-if="popularSeries.length !== 6" class="grid-popular">
           <div v-for="(item, i) in [0, 1, 2, 3, 4, 5]" :key="i" class="tile-popular" :class="popularMovieIndex(i)">
             <div class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
             </div>
@@ -190,7 +190,7 @@
         </div>
 
         <div v-else class="grid-popular">
-          <div v-for="(movie, index) in popularMovies" :key="index" class="tile-popular"
+          <div v-for="(movie, index) in popularSeries" :key="index" class="tile-popular"
             :class="popularMovieIndex(index)">
             <img :src="movie.image"
               class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
@@ -198,7 +198,7 @@
             <div class="text-xl relative z-10 truncate">{{ movie.title }}</div>
           </div>
         </div>
-      </div> -->
+      </div>
 
       <!-- <div class="mt-12">
         <div class="flex flex-row justify-between max-w-full w-full">
@@ -393,6 +393,26 @@ async function getDiscoverSeries() {
   }
 }
 getDiscoverSeries()
+
+
+const popularSeries = ref([])
+async function getPopularSeries() {
+  const response = await fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=5', authOptions)
+  const resObj = await response.json()
+
+  for (let i = 0; i < resObj.results.length; i++) {
+    const series = resObj.results[i];
+
+    if (series.backdrop_path && popularSeries.value.length < 6) {
+      popularSeries.value.push({
+        title: series.name,
+        releaseYear: series.first_air_date.slice(0, 4),
+        image: "https://image.tmdb.org/t/p/original" + series.backdrop_path
+      })
+    }
+  }
+}
+getPopularSeries()
 </script>
 
 <style></style>
