@@ -18,8 +18,10 @@
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
-            <div v-for="(item, slide) in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="slide" class="slide-trending">
-              <div class="absolute top-0 bottom-0 right-0 left-0 border-2 bg-gray-700 opacity-10 animate-pulse"></div>
+            <div v-for="(item, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="i" class="slide-trending">
+              <div
+                class="absolute top-0 bottom-0 right-0 left-0 border-2 bg-gray-700 opacity-10 animate-pulse rounded-lg">
+              </div>
               <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 Movie
               </div>
               <div class="text-xl relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full mt-2">xXxXx
@@ -33,11 +35,11 @@
 
             <div v-for="(movie, index) in discoverMovies" :key="index" class="slide-trending">
               <img :src="movie.image"
-                class="absolute top-0 bottom-0 right-0 left-0 select-none pointer-events-none opacity-60">
+                class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
               <div class="relative z-10">
                 {{ movie.releaseYear }} &#x2022 Movie
               </div>
-              <div class="text-xl relative z-10">
+              <div class="text-xl relative z-10 truncate">
                 {{ movie.title }}
               </div>
             </div>
@@ -46,6 +48,7 @@
       </div>
 
       <div class="mt-12">
+        <!-- {{ popularMovies }} -->
         <div class="flex flex-row justify-between max-w-full w-full">
           <h2 class="text-3xl flex flex-row items-end gap-x-4">
             Popular
@@ -57,8 +60,27 @@
           </router-link>
         </div>
 
-        <div class="mt-5 flex gap-x-4">
-          <div class="w-1/2 flex flex-col gap-y-4">
+        <div v-if="popularMovies.length !== 6" class="grid-popular">
+          <div v-for="(item, i) in [0, 1, 2, 3, 4, 5]" :key="i" class="tile-popular" :class="popularMovieIndex(i)">
+            <div class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
+            </div>
+            <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 Movie
+            </div>
+            <div class="text-xl relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full mt-2">xXxXx
+              XxXxX xXxX</div>
+          </div>
+        </div>
+
+        <div v-else class="grid-popular">
+          <div v-for="(movie, index) in popularMovies" :key="index" class="tile-popular"
+            :class="popularMovieIndex(index)">
+            <img :src="movie.image"
+              class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
+            <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>
+            <div class="text-xl relative z-10 truncate">{{ movie.title }}</div>
+          </div>
+
+          <!-- <div class="w-1/2 flex flex-col gap-y-4">
             <div class="flex gap-x-4">
               <div class="tile-popular">
                 <div class="">2023 &#x2022 Movie</div>
@@ -95,7 +117,7 @@
               </div>
 
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
 
@@ -341,10 +363,10 @@ async function getDiscoverMovies() {
     const movie = resObj.results[i];
 
     const imageResponse = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}/images`, authOptions)
-    const resOBJ = await imageResponse.json()
+    const imgResOBJ = await imageResponse.json()
 
-    if (resOBJ.backdrops && resOBJ.backdrops[0] && discoverMovies.value.length < 9) {
-      const filePath = `${resOBJ.backdrops[0].file_path}`
+    if (imgResOBJ.backdrops && imgResOBJ.backdrops[0] && discoverMovies.value.length < 9) {
+      const filePath = `${imgResOBJ.backdrops[0].file_path}`
 
       discoverMovies.value.push({
         title: movie.title,
@@ -353,11 +375,38 @@ async function getDiscoverMovies() {
       })
     }
   }
-
-  // console.log(toRaw(discoverMovies.value))
 }
 getDiscoverMovies()
-// console.log(toRaw(discoverMovies.value))
+
+const popularMovies = ref([])
+async function getPopularMovies() {
+  const response = await fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', authOptions)
+  const resObj = await response.json()
+
+  for (let i = 0; i < resObj.results.length; i++) {
+    const movie = resObj.results[i];
+
+    const imageResponse = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}/images`, authOptions)
+    const imgResOBJ = await imageResponse.json()
+
+    // console.log(movie)
+
+    if (imgResOBJ.backdrops && imgResOBJ.backdrops[0] && popularMovies.value.length < 6) {
+      const filePath = `${imgResOBJ.backdrops[0].file_path}`
+
+      popularMovies.value.push({
+        title: movie.title,
+        releaseYear: movie.release_date.slice(0, 4),
+        image: "https://image.tmdb.org/t/p/original" + filePath
+      })
+    }
+  }
+}
+getPopularMovies()
+
+function popularMovieIndex(index) {
+  return `tile${index + 1}`
+}
 
 </script>
 
