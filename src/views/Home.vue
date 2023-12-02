@@ -71,8 +71,7 @@
         </div>
 
         <div v-else class="grid-popular">
-          <div v-for="(movie, index) in popularMovies" :key="index" class="tile-popular"
-            :class="popularIndex(index)">
+          <div v-for="(movie, index) in popularMovies" :key="index" class="tile-popular" :class="popularIndex(index)">
             <img :src="movie.image"
               class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
             <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>
@@ -189,8 +188,7 @@
         </div>
 
         <div v-else class="grid-popular">
-          <div v-for="(movie, index) in popularSeries" :key="index" class="tile-popular"
-            :class="popularIndex(index)">
+          <div v-for="(movie, index) in popularSeries" :key="index" class="tile-popular" :class="popularIndex(index)">
             <img :src="movie.image"
               class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
             <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>
@@ -235,7 +233,7 @@
 
       </div>
 
-      <!-- <div class="mt-12">
+      <div class="mt-12">
         <div class="flex flex-row justify-between max-w-full w-full">
           <h2 class="text-3xl flex flex-row items-end gap-x-4">
             Airing Today
@@ -248,7 +246,7 @@
         </div>
 
         <div class="mt-5">
-          <Flicking v-if="discoverMovies.length !== 9" class="w-full h-[14rem]"
+          <Flicking v-if="airingToday.length !== 9" class="w-full h-[14rem]"
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
@@ -263,11 +261,11 @@
             </div>
           </Flicking>
 
-          <Flicking v-if="discoverMovies.length === 9" class="w-full h-[14rem]"
+          <Flicking v-if="airingToday.length === 9" class="w-full h-[14rem]"
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
-            <div v-for="(movie, index) in discoverMovies" :key="index" class="slide-trending">
+            <div v-for="(movie, index) in airingToday" :key="index" class="slide-trending">
               <img :src="movie.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
               <div class="relative z-10">
@@ -279,9 +277,16 @@
             </div>
           </Flicking>
         </div>
-      </div> -->
+      </div>
 
     </div>
+
+    <a href="https://www.themoviedb.org/" target="_blank" class="flex flex-col justify-center items-center gap-y-2 mb-[3rem]">
+      <p class="text-sm text-theme-light-blue2 font-semibold select-none">Powered By</p>
+      <img class="w-[10rem] select-none"
+        src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg">
+    </a>
+
   </div>
 </template>
 
@@ -429,6 +434,25 @@ async function getTopRatedSeries() {
   }
 }
 getTopRatedSeries()
+
+const airingToday = ref([])
+async function getAiring() {
+  const response = await fetch('https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1', authOptions)
+  const resObj = await response.json()
+
+  for (let i = 0; i < resObj.results.length; i++) {
+    const series = resObj.results[i];
+
+    if (series.backdrop_path && airingToday.value.length < 9) {
+      airingToday.value.push({
+        title: series.name,
+        releaseYear: series.first_air_date.slice(0, 4),
+        image: "https://image.tmdb.org/t/p/original" + series.backdrop_path
+      })
+    }
+  }
+}
+getAiring()
 
 </script>
 
