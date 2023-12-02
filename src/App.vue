@@ -1,8 +1,9 @@
 <template>
   <div class="overflow-x-hidden h-full flex flex-row tablet:flex-col mobile:flex-col">
     <div
-      class="h-full tablet:w-full tablet:h-fit mobile:w-full mobile:h-fit pt-6 pl-6 tablet:px-6 mobile:px-0 mobile:pt-0">
-      <div class="h-full tablet:w-full tablet:h-fit mobile:w-full mobile:h-fit pb-24 tablet:pb-0 mobile:pb-0">
+      class="h-full tablet:w-full tablet:h-fit mobile:w-full mobile:h-fit tablet:px-6 mobile:px-0 mobile:pt-0">
+      <div
+        class="h-full w-[5rem] tablet:h-[6rem] tablet:w-full mobile:h-[6rem] mobile:w-full tablet:pb-0 mobile:pb-0">
         <nav class="nav-bar">
           <router-link to="/">
             <img class="w-[2rem] min-w-[2rem]" src="./assets/images/logo.svg">
@@ -56,6 +57,8 @@
         </nav>
       </div>
     </div>
+
+
     <div class="w-full mt-6">
       <div class="mt-9 pr-[8.5rem] tablet:mt-0 mobile:mt-0 pl-[4rem] tablet:pl-6 tablet:pr-12 mobile:pl-6 mobile:pr-12">
         <div class="flex flex-row">
@@ -71,7 +74,6 @@
             type="text" placeholder="Search for movies or TV series">
         </div>
       </div>
-
 
       <div class="pl-[4rem] pr-[8.5rem] tablet:px-6 mobile:px-3">
         <router-view></router-view>
