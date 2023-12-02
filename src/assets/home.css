@@ -24,7 +24,7 @@
 
 @media (max-width: 899px) {
   .grid-popular {
-    @apply grid-cols-2 grid-rows-[repeat(8,14.5rem)];
+    @apply grid-cols-2 grid-rows-[repeat(3,14.5rem)];
     grid-template-areas:
       "tile1 tile2"
       "tile3 tile4"

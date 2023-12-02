@@ -286,7 +286,6 @@
       <img class="w-[10rem] select-none"
         src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg">
     </a>
-
   </div>
 </template>
 
@@ -299,6 +298,9 @@ const authOptions = {
     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZTFiY2MyZjkyZTQ3ZDM5NmE4ODBkZTg2N2FkNzdjMiIsInN1YiI6IjY1NmEwYzQxNjYxMWI0MDEwMDNkYWE1NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1vMeXlSKGAClK19ROM0E4OjMeTmmBKfZZ_mSq4ovi90'
   }
 };
+function popularIndex(index) {
+  return `tile${index + 1}`
+}
 
 // Movies
 const discoverMovies = ref([])
@@ -346,9 +348,6 @@ async function getPopularMovies() {
       })
     }
   }
-}
-function popularIndex(index) {
-  return `tile${index + 1}`
 }
 getPopularMovies()
 
