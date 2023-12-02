@@ -60,7 +60,7 @@
         </div>
 
         <div v-if="popularMovies.length !== 6" class="grid-popular">
-          <div v-for="(item, i) in [0, 1, 2, 3, 4, 5]" :key="i" class="tile-popular" :class="popularMovieIndex(i)">
+          <div v-for="(item, i) in [0, 1, 2, 3, 4, 5]" :key="i" class="tile-popular" :class="popularIndex(i)">
             <div class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
             </div>
             <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 Movie
@@ -72,7 +72,7 @@
 
         <div v-else class="grid-popular">
           <div v-for="(movie, index) in popularMovies" :key="index" class="tile-popular"
-            :class="popularMovieIndex(index)">
+            :class="popularIndex(index)">
             <img :src="movie.image"
               class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
             <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>
@@ -106,8 +106,7 @@
           </div>
 
           <div v-else class="mt-5 w-full flex flex-row gap-x-4">
-            <div v-for="(movie, index) in topRatedMovies" :key="index" class="tile-rated"
-              :class="popularMovieIndex(index)">
+            <div v-for="(movie, index) in topRatedMovies" :key="index" class="tile-rated">
               <img :src="movie.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
               <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>
@@ -179,7 +178,7 @@
         </div>
 
         <div v-if="popularSeries.length !== 6" class="grid-popular">
-          <div v-for="(item, i) in [0, 1, 2, 3, 4, 5]" :key="i" class="tile-popular" :class="popularMovieIndex(i)">
+          <div v-for="(item, i) in [0, 1, 2, 3, 4, 5]" :key="i" class="tile-popular" :class="popularIndex(i)">
             <div class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
             </div>
             <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 Movie
@@ -191,7 +190,7 @@
 
         <div v-else class="grid-popular">
           <div v-for="(movie, index) in popularSeries" :key="index" class="tile-popular"
-            :class="popularMovieIndex(index)">
+            :class="popularIndex(index)">
             <img :src="movie.image"
               class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
             <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>
@@ -200,7 +199,7 @@
         </div>
       </div>
 
-      <!-- <div class="mt-12">
+      <div class="mt-12">
         <div class="flex flex-row justify-between max-w-full w-full">
           <h2 class="text-3xl flex flex-row items-end gap-x-4">
             Top Rated
@@ -212,7 +211,7 @@
         </div>
 
         <div>
-          <div v-if="topRatedMovies.length !== 3" class="mt-5 w-full flex flex-row gap-x-4">
+          <div v-if="topRatedSeries.length !== 3" class="mt-5 w-full flex flex-row gap-x-4">
             <div v-for="(item, i) in [1, 2, 3]" :key="i" class="tile-rated">
               <div
                 class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
@@ -225,8 +224,7 @@
           </div>
 
           <div v-else class="mt-5 w-full flex flex-row gap-x-4">
-            <div v-for="(movie, index) in topRatedMovies" :key="index" class="tile-rated"
-              :class="popularMovieIndex(index)">
+            <div v-for="(movie, index) in topRatedSeries" :key="index" class="tile-rated">
               <img :src="movie.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
               <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>
@@ -235,7 +233,7 @@
           </div>
         </div>
 
-      </div> -->
+      </div>
 
       <!-- <div class="mt-12">
         <div class="flex flex-row justify-between max-w-full w-full">
@@ -344,7 +342,7 @@ async function getPopularMovies() {
     }
   }
 }
-function popularMovieIndex(index) {
+function popularIndex(index) {
   return `tile${index + 1}`
 }
 getPopularMovies()
@@ -394,7 +392,6 @@ async function getDiscoverSeries() {
 }
 getDiscoverSeries()
 
-
 const popularSeries = ref([])
 async function getPopularSeries() {
   const response = await fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=5', authOptions)
@@ -413,6 +410,26 @@ async function getPopularSeries() {
   }
 }
 getPopularSeries()
+
+const topRatedSeries = ref([])
+async function getTopRatedSeries() {
+  const response = await fetch('https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1', authOptions)
+  const resObj = await response.json()
+
+  for (let i = 0; i < resObj.results.length; i++) {
+    const series = resObj.results[i];
+
+    if (series.backdrop_path && topRatedSeries.value.length < 3) {
+      topRatedSeries.value.push({
+        title: series.name,
+        releaseYear: series.first_air_date.slice(0, 4),
+        image: "https://image.tmdb.org/t/p/original" + series.backdrop_path
+      })
+    }
+  }
+}
+getTopRatedSeries()
+
 </script>
 
 <style></style>
