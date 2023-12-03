@@ -18,7 +18,8 @@
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
-            <div v-for="(item, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="i" class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
+            <div v-for="(item, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="i"
+              class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
               <div
                 class="absolute top-0 bottom-0 right-0 left-0 border-2 bg-gray-700 opacity-10 animate-pulse rounded-lg">
               </div>
@@ -33,7 +34,8 @@
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
-            <div v-for="(movie, index) in discoverMovies" :key="index" class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
+            <div v-for="(movie, index) in discoverMovies" :key="index"
+              class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
               <img :src="movie.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
               <div class="relative z-10">
@@ -41,6 +43,30 @@
               </div>
               <div class="text-xl relative z-10 truncate">
                 {{ movie.title }}
+              </div>
+
+              <div class="title-options">
+                <button class="absolute top-3 right-3 flex justify-center items-center bg-gray-900 p-2 rounded-full">
+                  <svg v-if="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff"
+                    class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 16 16">
+                    <path
+                      d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
+                  </svg>
+                  <svg v-else class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 16 16">
+                    <path fill="#fff"
+                      d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
+                  </svg>
+                </button>
+
+                <button class="flex flex-row items-center gap-x-3 bg-[#ffffff74] px-3 py-2 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="w-[1.8rem] h-[1.8rem]" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5" />
+                  </svg>
+                  <p class="text-lg font-normal">Play</p>
+                </button>
               </div>
             </div>
           </Flicking>
@@ -76,6 +102,30 @@
               class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
             <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>
             <div class="text-xl relative z-10 truncate">{{ movie.title }}</div>
+
+            <div class="title-options">
+              <button class="absolute top-3 right-3 flex justify-center items-center bg-gray-900 p-2 rounded-full">
+                <svg v-if="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff"
+                  class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 16 16">
+                  <path
+                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
+                </svg>
+                <svg v-else class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                  viewBox="0 0 16 16">
+                  <path fill="#fff"
+                    d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
+                </svg>
+              </button>
+
+              <button class="flex flex-row items-center gap-x-3 bg-[#ffffff74] px-3 py-2 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="w-[1.8rem] h-[1.8rem]" viewBox="0 0 16 16">
+                  <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5" />
+                </svg>
+                <p class="text-lg font-normal">Play</p>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -110,6 +160,30 @@
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
               <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>
               <div class="text-xl relative z-10 truncate">{{ movie.title }}</div>
+
+              <div class="title-options">
+                <button class="absolute top-3 right-3 flex justify-center items-center bg-gray-900 p-2 rounded-full">
+                  <svg v-if="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff"
+                    class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 16 16">
+                    <path
+                      d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
+                  </svg>
+                  <svg v-else class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 16 16">
+                    <path fill="#fff"
+                      d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
+                  </svg>
+                </button>
+
+                <button class="flex flex-row items-center gap-x-3 bg-[#ffffff74] px-3 py-2 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="w-[1.8rem] h-[1.8rem]" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5" />
+                  </svg>
+                  <p class="text-lg font-normal">Play</p>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -134,11 +208,13 @@
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
-            <div v-for="(item, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="i" class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
+            <div v-for="(item, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="i"
+              class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
               <div
                 class="absolute top-0 bottom-0 right-0 left-0 border-2 bg-gray-700 opacity-10 animate-pulse rounded-lg">
               </div>
-              <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 TV Series
+              <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 TV
+                Series
               </div>
               <div class="text-xl relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full mt-2">xXxXx
                 XxXxX xXxX</div>
@@ -149,7 +225,8 @@
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
-            <div v-for="(movie, index) in discoverSeries" :key="index" class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
+            <div v-for="(movie, index) in discoverSeries" :key="index"
+              class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
               <img :src="movie.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
               <div class="relative z-10">
@@ -157,6 +234,30 @@
               </div>
               <div class="text-xl relative z-10 truncate">
                 {{ movie.title }}
+              </div>
+
+              <div class="title-options">
+                <button class="absolute top-3 right-3 flex justify-center items-center bg-gray-900 p-2 rounded-full">
+                  <svg v-if="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff"
+                    class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 16 16">
+                    <path
+                      d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
+                  </svg>
+                  <svg v-else class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 16 16">
+                    <path fill="#fff"
+                      d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
+                  </svg>
+                </button>
+
+                <button class="flex flex-row items-center gap-x-3 bg-[#ffffff74] px-3 py-2 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="w-[1.8rem] h-[1.8rem]" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5" />
+                  </svg>
+                  <p class="text-lg font-normal">Play</p>
+                </button>
               </div>
             </div>
           </Flicking>
@@ -179,7 +280,8 @@
           <div v-for="(item, i) in [0, 1, 2, 3, 4, 5]" :key="i" class="title-tile" :class="popularIndex(i)">
             <div class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
             </div>
-            <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 TV Series
+            <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 TV
+              Series
             </div>
             <div class="text-xl relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full mt-2">xXxXx
               XxXxX xXxX</div>
@@ -187,11 +289,35 @@
         </div>
 
         <div v-else class="grid-popular">
-          <div v-for="(movie, index) in popularSeries" :key="index" class="title-tile" :class="popularIndex(index)">
-            <img :src="movie.image"
+          <div v-for="(series, index) in popularSeries" :key="index" class="title-tile" :class="popularIndex(index)">
+            <img :src="series.image"
               class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
-            <div class="relative z-10">{{ movie.releaseYear }} &#x2022 TV Series</div>
-            <div class="text-xl relative z-10 truncate">{{ movie.title }}</div>
+            <div class="relative z-10">{{ series.releaseYear }} &#x2022 TV Series</div>
+            <div class="text-xl relative z-10 truncate">{{ series.title }}</div>
+              
+              <div class="title-options">
+                <button class="absolute top-3 right-3 flex justify-center items-center bg-gray-900 p-2 rounded-full">
+                  <svg v-if="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" class="w-[1.1rem] h-[1.1rem]"
+                    viewBox="0 0 16 16">
+                    <path
+                      d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
+                  </svg>
+                  <svg v-else class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 16 16">
+                    <path fill="#fff"
+                      d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
+                  </svg>
+                </button>
+
+                <button class="flex flex-row items-center gap-x-3 bg-[#ffffff74] px-3 py-2 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="w-[1.8rem] h-[1.8rem]" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5" />
+                  </svg>
+                  <p class="text-lg font-normal">Play</p>
+                </button>
+              </div>
           </div>
         </div>
       </div>
@@ -213,7 +339,8 @@
               <div
                 class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
               </div>
-              <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 TV Series
+              <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 TV
+                Series
               </div>
               <div class="text-xl relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full mt-2">xXxXx
                 XxXxX xXxX</div>
@@ -221,11 +348,35 @@
           </div>
 
           <div v-else class="rated-container">
-            <div v-for="(movie, index) in topRatedSeries" :key="index" class="title-tile">
-              <img :src="movie.image"
+            <div v-for="(series, index) in topRatedSeries" :key="index" class="title-tile">
+              <img :src="series.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
-              <div class="relative z-10">{{ movie.releaseYear }} &#x2022 TV Series</div>
-              <div class="text-xl relative z-10 truncate">{{ movie.title }}</div>
+              <div class="relative z-10">{{ series.releaseYear }} &#x2022 TV Series</div>
+              <div class="text-xl relative z-10 truncate">{{ series.title }}</div>
+
+              <div class="title-options">
+                <button class="absolute top-3 right-3 flex justify-center items-center bg-gray-900 p-2 rounded-full">
+                  <svg v-if="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff"
+                    class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 16 16">
+                    <path
+                      d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
+                  </svg>
+                  <svg v-else class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 16 16">
+                    <path fill="#fff"
+                      d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
+                  </svg>
+                </button>
+
+                <button class="flex flex-row items-center gap-x-3 bg-[#ffffff74] px-3 py-2 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="w-[1.8rem] h-[1.8rem]" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5" />
+                  </svg>
+                  <p class="text-lg font-normal">Play</p>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -249,11 +400,13 @@
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
-            <div v-for="(item, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="i" class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
+            <div v-for="(item, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="i"
+              class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
               <div
                 class="absolute top-0 bottom-0 right-0 left-0 border-2 bg-gray-700 opacity-10 animate-pulse rounded-lg">
               </div>
-              <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 TV Series
+              <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 TV
+                Series
               </div>
               <div class="text-xl relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full mt-2">xXxXx
                 XxXxX xXxX</div>
@@ -264,7 +417,8 @@
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
-            <div v-for="(movie, index) in airingToday" :key="index" class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
+            <div v-for="(movie, index) in airingToday" :key="index"
+              class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
               <img :src="movie.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
               <div class="relative z-10">
@@ -273,14 +427,37 @@
               <div class="text-xl relative z-10 truncate">
                 {{ movie.title }}
               </div>
+
+              <div class="title-options">
+                <button class="absolute top-3 right-3 flex justify-center items-center bg-gray-900 p-2 rounded-full">
+                  <svg v-if="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff"
+                    class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 16 16">
+                    <path
+                      d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
+                  </svg>
+                  <svg v-else class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 16 16">
+                    <path fill="#fff"
+                      d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
+                  </svg>
+                </button>
+
+                <button class="flex flex-row items-center gap-x-3 bg-[#ffffff74] px-3 py-2 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="w-[1.8rem] h-[1.8rem]" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5" />
+                  </svg>
+                  <p class="text-lg font-normal">Play</p>
+                </button>
+              </div>
             </div>
           </Flicking>
         </div>
       </div>
     </div>
 
-    <a href="https://www.themoviedb.org/" target="_blank"
-      class="flex flex-col justify-center items-center gap-y-2">
+    <a href="https://www.themoviedb.org/" target="_blank" class="flex flex-col justify-center items-center gap-y-2">
       <p class="text-sm text-theme-light-blue2 font-semibold select-none">Powered By</p>
       <img class="w-[10rem] select-none"
         src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg">
