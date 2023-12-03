@@ -3,7 +3,7 @@
     <div
       class="h-full tablet:w-full tablet:h-fit mobile:w-full mobile:h-fit tablet:px-6 mobile:px-0 mobile:pt-0">
       <div
-        class="h-full w-[5rem] tablet:h-[6rem] tablet:w-full mobile:h-[6rem] mobile:w-full tablet:pb-0 mobile:pb-0">
+        class="h-full w-[5rem] tablet:h-[6rem] tablet:w-full mobile:h-[6rem] mobile:w-full tablet:pb-0 mobile:pb-0 tablet:mb-6">
         <nav class="nav-bar">
           <router-link to="/">
             <img class="w-[2rem] min-w-[2rem]" src="./assets/images/logo.svg">
@@ -59,7 +59,7 @@
     </div>
 
 
-    <div class="w-full mt-6">
+    <div class="w-full mt-9">
       <div class="mt-9 pr-[8.5rem] tablet:mt-0 mobile:mt-0 pl-[4rem] tablet:pl-6 tablet:pr-12 mobile:pl-6 mobile:pr-12">
         <div class="flex flex-row">
           <button>
@@ -75,9 +75,10 @@
         </div>
       </div>
 
-      <div class="pl-[4rem] pr-[8.5rem] tablet:px-6 mobile:px-3">
+      <div class="">
         <router-view></router-view>
       </div>
+      
     </div>
   </div>
 </template>

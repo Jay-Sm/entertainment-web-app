@@ -13,8 +13,7 @@
 }
 
 .grid-popular {
-  @apply mt-5 grid-cols-4 grid-rows-[repeat(2,14rem)];
-  display: grid;
+  @apply mt-5 grid grid-cols-4 grid-rows-[repeat(2,14rem)];
   gap: 1rem;
   grid-template-areas:
     "tile1 tile2 tile3 tile3"
