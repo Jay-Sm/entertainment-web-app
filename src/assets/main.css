@@ -3,7 +3,6 @@
 @import url("home.css");
 @import url("movie.css");
 
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

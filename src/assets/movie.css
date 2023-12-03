@@ -1,14 +1,17 @@
 /* Movie General */
 .genre-grid {
   @apply w-[15rem] mb-auto mr-7 max-h-fit grid grid-cols-1 gap-y-[0.4rem];
+  @apply mobile:w-full mobile:flex mobile:min-h-max;
 }
 
 .genre-option {
   @apply w-full min-w-max transition-all pl-4 border-l-[1px] border-[#ffffff53] flex justify-start items-center text-xl tracking-wider text-gray-400 hover:text-gray-200;
+  @apply mobile:mx-1 mobile:ml-4 mobile:max-w-fit mobile:border-[2px] mobile:rounded-full mobile:justify-center mobile:items-center mobile:px-2 mobile:py-1;
 }
 
 .genre-selected {
-  @apply h-9 ml-3 text-[#b8d4ee] bg-gradient-to-r from-[#5a6a9055] to-transparent ;
+  @apply h-9 ml-3 text-[#b8d4ee] bg-gradient-to-r from-[#5a6a9055] to-transparent transition-all;
+  @apply mobile:ml-4 mobile:h-auto to-[#5a6a9055];
 }
 
 .movie-container {
@@ -17,4 +20,13 @@
 
 .movie-tile {
   @apply w-full h-[14rem] rounded-lg flex flex-col justify-end p-4 relative select-none overflow-hidden;
+}
+
+.page-selection {
+  @apply w-[25rem] grid border-2 border-white rounded-lg items-center justify-center;
+  grid-template-columns: 0.5fr 1.2fr 0.5fr;
+}
+
+.page-selection button {
+  @apply w-full h-full flex flex-row items-center gap-x-2 hover:gap-x-3 transition-all;
 }
