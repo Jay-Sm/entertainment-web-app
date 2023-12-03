@@ -198,7 +198,7 @@
             <div class="label-tv">TV SERIES</div>
           </h2>
 
-          <router-link to="/movie" class="text-theme-light-blue2 font-medium text-[0.8rem] hover:underline">
+          <router-link to="/tv" class="text-theme-light-blue2 font-medium text-[0.8rem] hover:underline">
             SEE MORE
           </router-link>
         </div>
@@ -271,7 +271,7 @@
             <div class="label-tv">TV SERIES</div>
           </h2>
 
-          <router-link to="/movie" class="text-theme-light-blue2 font-medium text-[0.8rem] hover:underline">
+          <router-link to="/tv" class="text-theme-light-blue2 font-medium text-[0.8rem] hover:underline">
             SEE MORE
           </router-link>
         </div>
@@ -328,7 +328,7 @@
             Top Rated
             <div class="label-tv">TV SERIES</div>
           </h2>
-          <router-link to="/movie" class="text-theme-light-blue2 font-medium text-[0.8rem] hover:underline">
+          <router-link to="/tv" class="text-theme-light-blue2 font-medium text-[0.8rem] hover:underline">
             SEE MORE
           </router-link>
         </div>
@@ -390,7 +390,7 @@
             <div class="label-tv">TV SERIES</div>
           </h2>
 
-          <router-link to="/movie" class="text-theme-light-blue2 font-medium text-[0.8rem] hover:underline">
+          <router-link to="/tv" class="text-theme-light-blue2 font-medium text-[0.8rem] hover:underline">
             SEE MORE
           </router-link>
         </div>
