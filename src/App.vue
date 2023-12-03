@@ -1,7 +1,6 @@
 <template>
   <div class="overflow-x-hidden h-full flex flex-row tablet:flex-col mobile:flex-col">
-    <div
-      class="h-full tablet:w-full tablet:h-fit mobile:w-full mobile:h-fit tablet:px-6 mobile:px-0 mobile:pt-0">
+    <div class="h-full tablet:w-full tablet:h-fit mobile:w-full mobile:h-fit tablet:px-6 mobile:px-0 mobile:pt-0">
       <div
         class="h-full w-[5rem] tablet:h-[6rem] tablet:w-full mobile:h-[6rem] mobile:w-full tablet:pb-0 mobile:pb-0 tablet:mb-6">
         <nav class="nav-bar">
@@ -71,19 +70,45 @@
           </button>
           <input
             class=" w-full bg-transparent ml-5 pb-2 font-light text-2xl placeholder:font-light placeholder:text-2xl placeholder:opacity-70 outline-none focus:border-b focus:border-b-theme-light-blue2"
-            type="text" placeholder="Search for movies or TV series">
+            type="text" :placeholder="changeSearch(currentRoute)">
         </div>
       </div>
 
       <div class="">
         <router-view></router-view>
       </div>
-      
+
     </div>
   </div>
 </template>
 
 <script setup>
+import { watch, ref } from 'vue'
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const currentRoute = ref('')
+watch(() => route.path, (newPath, oldPath) => {
+  console.log('from:' + oldPath);
+  console.log('to:' + newPath);
+
+  currentRoute.value = newPath
+});
+
+function changeSearch(route) {
+  switch (route) {
+    case '/movie':
+      return 'Search for Movies'
+      break;
+    case '/tv':
+      return 'Search for TV Series'
+      break;
+
+    default:
+      return 'Search for Movies or TV Series'
+      break;
+  }
+}
 </script>
 
 <style></style>
