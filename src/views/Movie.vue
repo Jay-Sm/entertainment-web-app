@@ -22,7 +22,7 @@
         class="grid grid-cols-3 mobile:grid-cols-2 tablet:grid-cols-2 small:grid-cols-2 gap-4 w-full">
         <div v-for="(movie, index) in genreMovies" :key="index">
           <div v-if="genreMovies.length !== 15" class="movie-container">
-            <div class="movie-tile">
+            <div class="title-tile">
               <div
                 class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
               </div>
@@ -36,7 +36,7 @@
           </div>
 
           <div v-else class="movie-container">
-            <div class="movie-tile">
+            <div class="title-tile">
               <img :src="movie.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
               <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>

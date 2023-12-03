@@ -18,7 +18,7 @@
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
-            <div v-for="(item, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="i" class="slide-trending">
+            <div v-for="(item, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="i" class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
               <div
                 class="absolute top-0 bottom-0 right-0 left-0 border-2 bg-gray-700 opacity-10 animate-pulse rounded-lg">
               </div>
@@ -33,7 +33,7 @@
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
-            <div v-for="(movie, index) in discoverMovies" :key="index" class="slide-trending">
+            <div v-for="(movie, index) in discoverMovies" :key="index" class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
               <img :src="movie.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
               <div class="relative z-10">
@@ -60,7 +60,7 @@
         </div>
 
         <div v-if="popularMovies.length !== 6" class="grid-popular">
-          <div v-for="(item, i) in [0, 1, 2, 3, 4, 5]" :key="i" class="tile-popular" :class="popularIndex(i)">
+          <div v-for="(item, i) in [0, 1, 2, 3, 4, 5]" :key="i" class="title-tile" :class="popularIndex(i)">
             <div class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
             </div>
             <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 Movie
@@ -71,7 +71,7 @@
         </div>
 
         <div v-else class="grid-popular">
-          <div v-for="(movie, index) in popularMovies" :key="index" class="tile-popular" :class="popularIndex(index)">
+          <div v-for="(movie, index) in popularMovies" :key="index" class="title-tile" :class="popularIndex(index)">
             <img :src="movie.image"
               class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
             <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>
@@ -93,7 +93,7 @@
 
         <div>
           <div v-if="topRatedMovies.length !== 3" class="rated-container">
-            <div v-for="(item, i) in [1, 2, 3]" :key="i" class="tile-rated">
+            <div v-for="(item, i) in [1, 2, 3]" :key="i" class="title-tile">
               <div
                 class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
               </div>
@@ -105,7 +105,7 @@
           </div>
 
           <div v-else class="rated-container">
-            <div v-for="(movie, index) in topRatedMovies" :key="index" class="tile-rated">
+            <div v-for="(movie, index) in topRatedMovies" :key="index" class="title-tile">
               <img :src="movie.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
               <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>
@@ -135,7 +135,7 @@
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
-            <div v-for="(item, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="i" class="slide-trending">
+            <div v-for="(item, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="i" class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
               <div
                 class="absolute top-0 bottom-0 right-0 left-0 border-2 bg-gray-700 opacity-10 animate-pulse rounded-lg">
               </div>
@@ -150,7 +150,7 @@
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
-            <div v-for="(movie, index) in discoverSeries" :key="index" class="slide-trending">
+            <div v-for="(movie, index) in discoverSeries" :key="index" class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
               <img :src="movie.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
               <div class="relative z-10">
@@ -177,7 +177,7 @@
         </div>
 
         <div v-if="popularSeries.length !== 6" class="grid-popular">
-          <div v-for="(item, i) in [0, 1, 2, 3, 4, 5]" :key="i" class="tile-popular" :class="popularIndex(i)">
+          <div v-for="(item, i) in [0, 1, 2, 3, 4, 5]" :key="i" class="title-tile" :class="popularIndex(i)">
             <div class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
             </div>
             <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 Movie
@@ -188,7 +188,7 @@
         </div>
 
         <div v-else class="grid-popular">
-          <div v-for="(movie, index) in popularSeries" :key="index" class="tile-popular" :class="popularIndex(index)">
+          <div v-for="(movie, index) in popularSeries" :key="index" class="title-tile" :class="popularIndex(index)">
             <img :src="movie.image"
               class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
             <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>
@@ -210,7 +210,7 @@
 
         <div>
           <div v-if="topRatedSeries.length !== 3" class="rated-container">
-            <div v-for="(item, i) in [1, 2, 3]" :key="i" class="tile-rated">
+            <div v-for="(item, i) in [1, 2, 3]" :key="i" class="title-tile">
               <div
                 class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
               </div>
@@ -222,7 +222,7 @@
           </div>
 
           <div v-else class="rated-container">
-            <div v-for="(movie, index) in topRatedSeries" :key="index" class="tile-rated">
+            <div v-for="(movie, index) in topRatedSeries" :key="index" class="title-tile">
               <img :src="movie.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
               <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>
@@ -250,7 +250,7 @@
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
-            <div v-for="(item, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="i" class="slide-trending">
+            <div v-for="(item, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="i" class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
               <div
                 class="absolute top-0 bottom-0 right-0 left-0 border-2 bg-gray-700 opacity-10 animate-pulse rounded-lg">
               </div>
@@ -265,7 +265,7 @@
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
-            <div v-for="(movie, index) in airingToday" :key="index" class="slide-trending">
+            <div v-for="(movie, index) in airingToday" :key="index" class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
               <img :src="movie.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
               <div class="relative z-10">
@@ -278,7 +278,6 @@
           </Flicking>
         </div>
       </div>
-
     </div>
 
     <a href="https://www.themoviedb.org/" target="_blank"

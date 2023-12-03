@@ -35,3 +35,9 @@ body {
   @apply xxl:bg-[#f58080];
   @apply tv:bg-white;
 }
+
+/* Movie & Series Containers/Tiles */
+
+.title-tile {
+  @apply w-full h-[14rem] rounded-lg flex flex-col justify-end p-4 relative overflow-hidden select-none;
+}
