@@ -1,8 +1,7 @@
 /* Nav Bar */
-
 .nav-bar {
   @apply fixed top-6 left-6 bottom-24 z-30 w-[5rem] max-h-[47rem] pt-8 pb-10 bg-theme-light-blue rounded-lg flex flex-col justify-between items-center;
-  @apply tablet:h-[6rem] tablet:right-6 tablet:w-auto tablet:flex-row tablet:px-8 tablet:py-0 ;
+  @apply tablet:h-[6rem] tablet:right-6 tablet:w-auto tablet:flex-row tablet:px-8 tablet:py-0;
   @apply mobile:h-[6rem] mobile:right-0 mobile:left-0 mobile:top-0 mobile:w-auto mobile:flex-row mobile:px-8 mobile:py-0 mobile:rounded-none;
 }
 
@@ -10,14 +9,27 @@
   @apply w-[1.5rem] h-[1.5rem] box-border;
 }
 
-.fill-icon rect, .fill-icon path {
+.fill-icon rect,
+.fill-icon path {
   @apply fill-theme-light-blue2 transition-colors duration-300;
 }
 
-:hover.fill-icon rect, :hover.fill-icon path {
+:hover.fill-icon rect,
+:hover.fill-icon path {
   @apply fill-theme-logo-red;
 }
 
-.router-link-active rect, .router-link-active path{
-  @apply !fill-[#ffffff]
+.router-link-active rect,
+.router-link-active path {
+  @apply !fill-[#ffffff];
+}
+
+/* Search Bar */
+.search-input {
+  @apply w-full bg-transparent ml-5 pb-2 font-light text-2xl placeholder:font-light placeholder:text-2xl placeholder:opacity-70;
+}
+
+.search-results {
+  @apply absolute left-[7.24rem] right-[8.5rem] h-0 transition-all duration-300 bg-background-dark-blue bg-opacity-80 border border-theme-light-blue2 z-20 rounded-b-lg;
+  @apply tablet:left-[4.72rem] tablet:right-[3rem] mobile:left-[4.72rem] mobile:right-[3rem];
 }

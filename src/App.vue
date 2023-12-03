@@ -59,18 +59,21 @@
 
 
     <div class="w-full mt-9">
-      <div class="mt-9 pr-[8.5rem] tablet:mt-0 mobile:mt-0 pl-[4rem] tablet:pl-6 tablet:pr-12 mobile:pl-6 mobile:pr-12">
+      <div :class="{ 'overflow-hidden': !searching }" v-on:mouseleave="searching = false"
+        v-on:click="focusSearch($event); searching = true"
+        class="mt-9 pr-[8.5rem] tablet:mt-0 mobile:mt-0 pl-[4rem] tablet:pl-6 tablet:pr-12 mobile:pl-6 mobile:pr-12 relative">
         <div class="flex flex-row">
-          <button>
+          <button @click="focusSearch($event)">
             <svg class="w-[2rem] h-[2rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff"
               viewBox="0 0 16 16">
               <path
                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
             </svg>
           </button>
-          <input
-            class=" w-full bg-transparent ml-5 pb-2 font-light text-2xl placeholder:font-light placeholder:text-2xl placeholder:opacity-70 outline-none focus:border-b focus:border-b-theme-light-blue2"
-            type="text" :placeholder="changeSearch(currentRoute)">
+          <input class="search-input outline-none" type="text" :placeholder="changeSearch(currentRoute)" v-on:focus="searching = true">
+        </div>
+        <div class="search-results" :class="{ '!h-[30rem]': searching }" v-on:mousedown="focusSearch($event)"
+          v-on:mouseup="focusSearch($event)">
         </div>
       </div>
 
@@ -95,11 +98,15 @@ watch(() => route.path, (newPath, oldPath) => {
   currentRoute.value = newPath
 });
 
+
+const searching = ref(false)
+
 function changeSearch(route) {
   switch (route) {
     case '/movie':
       return 'Search for Movies'
       break;
+
     case '/tv':
       return 'Search for TV Series'
       break;
@@ -108,6 +115,10 @@ function changeSearch(route) {
       return 'Search for Movies or TV Series'
       break;
   }
+}
+
+function focusSearch(event) {
+  event.target.parentElement.parentElement.querySelector('input').focus()
 }
 </script>
 

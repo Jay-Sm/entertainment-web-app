@@ -33,7 +33,7 @@ const routes = [
       title: "Bookmarked Titles | Entertainment App"
     },
     component: () => import("../views/Bookmarked.vue"),
-  },
+  }
 ];
 
 const router = createRouter({
