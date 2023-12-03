@@ -113,7 +113,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -139,7 +138,7 @@
               <div
                 class="absolute top-0 bottom-0 right-0 left-0 border-2 bg-gray-700 opacity-10 animate-pulse rounded-lg">
               </div>
-              <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 Movie
+              <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 TV Series
               </div>
               <div class="text-xl relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full mt-2">xXxXx
                 XxXxX xXxX</div>
@@ -154,7 +153,7 @@
               <img :src="movie.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
               <div class="relative z-10">
-                {{ movie.releaseYear }} &#x2022 Movie
+                {{ movie.releaseYear }} &#x2022 TV Series
               </div>
               <div class="text-xl relative z-10 truncate">
                 {{ movie.title }}
@@ -180,7 +179,7 @@
           <div v-for="(item, i) in [0, 1, 2, 3, 4, 5]" :key="i" class="title-tile" :class="popularIndex(i)">
             <div class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
             </div>
-            <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 Movie
+            <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 TV Series
             </div>
             <div class="text-xl relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full mt-2">xXxXx
               XxXxX xXxX</div>
@@ -191,7 +190,7 @@
           <div v-for="(movie, index) in popularSeries" :key="index" class="title-tile" :class="popularIndex(index)">
             <img :src="movie.image"
               class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
-            <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>
+            <div class="relative z-10">{{ movie.releaseYear }} &#x2022 TV Series</div>
             <div class="text-xl relative z-10 truncate">{{ movie.title }}</div>
           </div>
         </div>
@@ -214,7 +213,7 @@
               <div
                 class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
               </div>
-              <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 Movie
+              <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 TV Series
               </div>
               <div class="text-xl relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full mt-2">xXxXx
                 XxXxX xXxX</div>
@@ -225,7 +224,7 @@
             <div v-for="(movie, index) in topRatedSeries" :key="index" class="title-tile">
               <img :src="movie.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
-              <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>
+              <div class="relative z-10">{{ movie.releaseYear }} &#x2022 TV Series</div>
               <div class="text-xl relative z-10 truncate">{{ movie.title }}</div>
             </div>
           </div>
@@ -254,7 +253,7 @@
               <div
                 class="absolute top-0 bottom-0 right-0 left-0 border-2 bg-gray-700 opacity-10 animate-pulse rounded-lg">
               </div>
-              <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 Movie
+              <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 TV Series
               </div>
               <div class="text-xl relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full mt-2">xXxXx
                 XxXxX xXxX</div>
@@ -269,7 +268,7 @@
               <img :src="movie.image"
                 class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
               <div class="relative z-10">
-                {{ movie.releaseYear }} &#x2022 Movie
+                {{ movie.releaseYear }} &#x2022 TV Series
               </div>
               <div class="text-xl relative z-10 truncate">
                 {{ movie.title }}
