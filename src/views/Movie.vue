@@ -1,6 +1,6 @@
 <template>
   <div class="h-full flex flex-row mobile:flex-col mt-7 mb-[3rem] pl-[4rem] pr-[3.5rem] tablet:px-6 mobile:px-3">
-    <div>
+    <div class="mobile:h-[2.6rem] mobile:mb-1">
       <div v-if="windowWidth > 514" class="genre-grid">
         <button v-for="(genre, index) in genres" :key="index" class="genre-option"
           :class="{ 'genre-selected': currentGenreID === genre.id }" @click="currentGenreID = genre.id; newGenre();">

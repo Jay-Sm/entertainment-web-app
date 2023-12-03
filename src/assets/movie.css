@@ -1,7 +1,7 @@
 /* Movie General */
 .genre-grid {
   @apply w-[15rem] mb-auto mr-7 max-h-fit grid grid-cols-1 gap-y-[0.4rem];
-  @apply mobile:w-full mobile:flex mobile:min-h-max;
+  @apply mobile:w-full mobile:flex mobile:max-h-full mobile:h-full;
 }
 
 .genre-option {
@@ -11,7 +11,7 @@
 
 .genre-selected {
   @apply h-9 ml-3 text-[#b8d4ee] bg-gradient-to-r from-[#5a6a9055] to-transparent transition-all;
-  @apply mobile:ml-4 mobile:h-auto to-[#5a6a9055];
+  @apply mobile:ml-4 mobile:h-auto mobile:to-[#5a6a9055];
 }
 
 .movie-container {
