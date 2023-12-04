@@ -47,10 +47,10 @@ body {
 }
 
 .title-options {
-  @apply absolute opacity-0 top-0 h-0 right-0 w-full flex justify-center items-center z-20 bg-[#00000090];
-  @apply transition-all duration-[330ms] delay-500;
+  @apply absolute opacity-0 top-[-100%] h-0 right-0 w-full flex justify-center items-center z-20 bg-[#00000090];
+  @apply transition-all duration-[450ms] delay-500;
 }
 
 .title-tile:hover .title-options {
-  @apply opacity-100 h-full;
+  @apply opacity-100 h-full top-0;
 }

@@ -57,7 +57,6 @@
       </div>
     </div>
 
-
     <div class="w-full mt-9">
       <div :class="{ 'overflow-hidden': !searching }" v-on:mouseleave="searching = false"
         v-on:click="focusSearch($event); searching = true"
@@ -70,37 +69,67 @@
                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
             </svg>
           </button>
-          <input class="search-input outline-none" type="text" :placeholder="changeSearch(currentRoute)" v-on:focus="searching = true">
+          <input class="search-input outline-none" type="text" :placeholder="changeSearch(currentRoute)"
+            v-model.lazy="searchText" v-on:focus="searching = true">
         </div>
-        <div class="search-results" :class="{ '!h-[30rem]': searching }" v-on:mousedown="focusSearch($event)"
-          v-on:mouseup="focusSearch($event)">
+        <div class="search-results" :class="{ '!h-[30rem]': searching }" v-on:click="focusSearch($event)">
+
+          <div class="w-full flex flex-col items-start gap-y-5 px-[3%]">
+            <p class="w-full text-center border-b text-xl font-normal tracking-wide">Movies</p>
+
+            <div class="search-result">
+              <div class="flex justify-center items-center max-w-fit my-2 gap-x-2 px-3 rounded-xl hover:bg-[#5a6a9055]"
+                v-for="(movie, index) in movieSearch" :key="index">
+                <p class="truncate">{{ movie.title }}</p>
+                <p>&#x2022</p>
+                <p>{{ movie.releaseYear }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full flex flex-col items-start gap-y-5 px-[3%]">
+            <p class="w-full text-center border-b text-xl font-normal tracking-wide">TV</p>
+
+            <div class="search-result">
+              <div class="flex justify-center items-center max-w-fit my-2 gap-x-2 px-3 rounded-xl hover:bg-[#5a6a9055]"
+                v-for="(series, index) in seriesSearch" :key="index">
+                <p class="truncate">{{ series.title }}</p>
+                <p>&#x2022</p>
+                <p>{{ series.releaseYear }}</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
       <div class="">
         <router-view></router-view>
       </div>
-
     </div>
   </div>
 </template>
 
 <script setup>
-import { watch, ref } from 'vue'
+import { watch, watchEffect, ref, toRaw } from 'vue'
 import { useRoute } from 'vue-router';
+const authOptions = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZTFiY2MyZjkyZTQ3ZDM5NmE4ODBkZTg2N2FkNzdjMiIsInN1YiI6IjY1NmEwYzQxNjYxMWI0MDEwMDNkYWE1NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1vMeXlSKGAClK19ROM0E4OjMeTmmBKfZZ_mSq4ovi90'
+  }
+};
 
 const route = useRoute();
 const currentRoute = ref('')
 watch(() => route.path, (newPath, oldPath) => {
-  console.log('from:' + oldPath);
-  console.log('to:' + newPath);
-
   currentRoute.value = newPath
 });
 
+// 
 
-const searching = ref(false)
-
+const searching = ref(true)
 function changeSearch(route) {
   switch (route) {
     case '/movie':
@@ -120,6 +149,65 @@ function changeSearch(route) {
 function focusSearch(event) {
   event.target.parentElement.parentElement.querySelector('input').focus()
 }
+
+// 
+
+const searchText = ref('')
+
+const movieSearch = ref([])
+async function searchMovies() {
+  const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${searchText.value}&include_adult=false&language=en-US&page=1`, authOptions)
+  const resObj = await response.json()
+
+  for (let i = 0; i < resObj.results.length; i++) {
+    const movie = resObj.results[i];
+
+    const imageResponse = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}/images`, authOptions)
+    const imgResOBJ = await imageResponse.json()
+
+    if (imgResOBJ.backdrops && imgResOBJ.backdrops[0] && movieSearch.value.length < 8 && movie.release_date) {
+      const filePath = `${imgResOBJ.backdrops[0].file_path}`
+
+      movieSearch.value.push({
+        title: movie.title,
+        releaseYear: movie.release_date.slice(0, 4),
+        image: "https://image.tmdb.org/t/p/original" + filePath
+      })
+    }
+  }
+  // console.log(toRaw(movieSearch.value[0]))
+}
+
+const seriesSearch = ref([])
+async function searchSeries() {
+  const response = await fetch(`https://api.themoviedb.org/3/search/tv?query=${searchText.value}&include_adult=false&language=en-US&page=1`, authOptions)
+  const resObj = await response.json()
+
+  for (let i = 0; i < resObj.results.length; i++) {
+    const series = resObj.results[i];
+
+    if (series.backdrop_path && seriesSearch.value.length < 8) {
+      seriesSearch.value.push({
+        title: series.name,
+        releaseYear: series.first_air_date.slice(0, 4),
+        image: "https://image.tmdb.org/t/p/original" + series.backdrop_path
+      })
+    }
+  }
+  console.log(toRaw(seriesSearch.value[0]))
+  console.log(resObj)
+}
+
+watch(() => searchText.value, () => {
+  console.log('new search!')
+
+  seriesSearch.value = []
+  movieSearch.value = []
+
+  searchSeries()
+  searchMovies()
+})
+
 </script>
 
 <style></style>
