@@ -1,8 +1,9 @@
 <template>
-  <div class="overflow-x-hidden h-full flex flex-row tablet:flex-col mobile:flex-col">
+  <div class="overflow-x-hidden h-full flex flex-row tablet:flex-col mobile:flex-col" v-on:click.self="searching = false">
     <div class="h-full tablet:w-full tablet:h-fit mobile:w-full mobile:h-fit tablet:px-6 mobile:px-0 mobile:pt-0">
       <div
-        class="h-full w-[5rem] tablet:h-[6rem] tablet:w-full mobile:h-[6rem] mobile:w-full tablet:pb-0 mobile:pb-0 tablet:mb-6">
+        class="h-full w-[5rem] tablet:h-[6rem] tablet:w-full mobile:h-[6rem] mobile:w-full tablet:pb-0 mobile:pb-0 tablet:mb-6"
+        v-on:click="searching = false">
         <nav class="nav-bar">
           <router-link to="/">
             <img class="w-[2rem] min-w-[2rem]" src="./assets/images/logo.svg">
@@ -70,7 +71,8 @@
             </svg>
           </button>
           <input class="search-input outline-none" type="text" :placeholder="changeSearch(currentRoute)"
-            v-model.lazy="searchText" v-on:focus="searching = true">
+            v-on:keypress.enter="focusSearch($event); searching = true" v-model.lazy="searchText"
+            v-on:focus="searching = true">
         </div>
         <div class="search-results" :class="{ '!h-[30rem]': searching }" v-on:click="focusSearch($event)">
 
@@ -78,12 +80,13 @@
             <p class="w-full text-center border-b text-xl font-normal tracking-wide">Movies</p>
 
             <div class="search-result">
-              <div class="flex justify-center items-center max-w-fit my-2 gap-x-2 px-3 rounded-xl hover:bg-[#5a6a9055]"
+              <a :href="movie.link" target="_blank"
+                class="flex justify-center items-center max-w-fit my-2 gap-x-2 px-3 rounded-xl hover:bg-[#5a6a9055]"
                 v-for="(movie, index) in movieSearch" :key="index">
                 <p class="truncate">{{ movie.title }}</p>
                 <p>&#x2022</p>
                 <p>{{ movie.releaseYear }}</p>
-              </div>
+              </a>
             </div>
           </div>
 
@@ -91,19 +94,20 @@
             <p class="w-full text-center border-b text-xl font-normal tracking-wide">TV</p>
 
             <div class="search-result">
-              <div class="flex justify-center items-center max-w-fit my-2 gap-x-2 px-3 rounded-xl hover:bg-[#5a6a9055]"
+              <a :href="series.link" target="_blank"
+                class="flex justify-center items-center max-w-fit my-2 gap-x-2 px-3 rounded-xl hover:bg-[#5a6a9055]"
                 v-for="(series, index) in seriesSearch" :key="index">
                 <p class="truncate">{{ series.title }}</p>
                 <p>&#x2022</p>
                 <p>{{ series.releaseYear }}</p>
-              </div>
+              </a>
             </div>
           </div>
 
         </div>
       </div>
 
-      <div class="">
+      <div class="" v-on:click="searching = false">
         <router-view></router-view>
       </div>
     </div>
@@ -122,14 +126,14 @@ const authOptions = {
 };
 
 const route = useRoute();
-const currentRoute = ref('')
+const currentRoute = ref(route.path)
 watch(() => route.path, (newPath, oldPath) => {
   currentRoute.value = newPath
 });
 
 // 
 
-const searching = ref(true)
+const searching = ref(false)
 function changeSearch(route) {
   switch (route) {
     case '/movie':
@@ -156,6 +160,19 @@ const searchText = ref('')
 
 const movieSearch = ref([])
 async function searchMovies() {
+  switch (currentRoute.value) {
+    case '/':
+      break;
+
+    case '/movie':
+      break;
+
+    default:
+      console.log(currentRoute.value);
+      return
+      break;
+  }
+
   const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${searchText.value}&include_adult=false&language=en-US&page=1`, authOptions)
   const resObj = await response.json()
 
@@ -165,13 +182,18 @@ async function searchMovies() {
     const imageResponse = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}/images`, authOptions)
     const imgResOBJ = await imageResponse.json()
 
-    if (imgResOBJ.backdrops && imgResOBJ.backdrops[0] && movieSearch.value.length < 8 && movie.release_date) {
+    const providerResponse = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}/watch/providers`, authOptions)
+    const provResOBJ = await providerResponse.json()
+
+    if (imgResOBJ.backdrops && imgResOBJ.backdrops[0] && movieSearch.value.length < 8 && movie.release_date && provResOBJ.results['US']) {
       const filePath = `${imgResOBJ.backdrops[0].file_path}`
+      const providerLink = provResOBJ.results['US'].link
 
       movieSearch.value.push({
         title: movie.title,
         releaseYear: movie.release_date.slice(0, 4),
-        image: "https://image.tmdb.org/t/p/original" + filePath
+        image: "https://image.tmdb.org/t/p/original" + filePath,
+        link: providerLink
       })
     }
   }
@@ -180,27 +202,42 @@ async function searchMovies() {
 
 const seriesSearch = ref([])
 async function searchSeries() {
+  switch (currentRoute.value) {
+    case '/':
+      break;
+
+    case '/tv':
+      break;
+
+    default:
+      return
+      break;
+  }
   const response = await fetch(`https://api.themoviedb.org/3/search/tv?query=${searchText.value}&include_adult=false&language=en-US&page=1`, authOptions)
   const resObj = await response.json()
 
   for (let i = 0; i < resObj.results.length; i++) {
     const series = resObj.results[i];
 
-    if (series.backdrop_path && seriesSearch.value.length < 8) {
+    const providerResponse = await fetch(`https://api.themoviedb.org/3/tv/${series.id}/watch/providers`, authOptions)
+    const provResOBJ = await providerResponse.json()
+
+    if (series.backdrop_path && seriesSearch.value.length < 8 && series.first_air_date && provResOBJ.results['US']) {
+      const providerLink = provResOBJ.results['US'].link
+
       seriesSearch.value.push({
         title: series.name,
         releaseYear: series.first_air_date.slice(0, 4),
-        image: "https://image.tmdb.org/t/p/original" + series.backdrop_path
+        image: "https://image.tmdb.org/t/p/original" + series.backdrop_path,
+        link: providerLink
       })
     }
   }
-  console.log(toRaw(seriesSearch.value[0]))
-  console.log(resObj)
+  // console.log(toRaw(seriesSearch.value[0]))
+  // console.log(resObj)
 }
 
 watch(() => searchText.value, () => {
-  console.log('new search!')
-
   seriesSearch.value = []
   movieSearch.value = []
 
