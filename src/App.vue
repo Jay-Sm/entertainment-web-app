@@ -108,7 +108,11 @@
       </div>
 
       <div class="relative" v-on:click="searching = false">
-        <Login v-if="loggingIn === true" @closeModal="loggingIn = false" />
+        <Login v-if="loggingIn === true" @closeLogIn="loggingIn = !loggingIn"
+          @createAcc="creatingAccount = !creatingAccount" />
+
+        <CreateAccount v-if="creatingAccount === true" @closeCreateAcc="creatingAccount = !creatingAccount"
+          @logIn="loggingIn = !loggingIn" />
         <div>
           <router-view @logIn="loggingIn = true"></router-view>
         </div>
@@ -119,8 +123,10 @@
 
 <script setup>
 import { watch, ref } from 'vue'
-import Login from "./components/Login.vue";
 import { useRoute } from 'vue-router';
+
+import CreateAccount from './components/CreateAccount.vue'
+import Login from "./components/Login.vue";
 const authOptions = {
   method: 'GET',
   headers: {
@@ -129,7 +135,8 @@ const authOptions = {
   }
 };
 
-const loggingIn = ref(true)
+const loggingIn = ref(false)
+const creatingAccount = ref(true)
 
 const route = useRoute();
 const currentRoute = ref(route.path)
