@@ -1,8 +1,8 @@
 <template>
-  <div class="login-backdrop">
+  <div class="login-backdrop" v-on:click.self="emit('closeModal')">
     <div class="test-class">
       <div class="flex justify-end">
-        <button class="w-6 h-6">
+        <button @click="emit('closeModal')" class="w-6 h-6">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full fill-[#89a0d7]" viewBox="0 0 512 512">
             <path
               d="M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208 208-93.31 208-208S370.69 48 256 48zm75.31 260.69a16 16 0 11-22.62 22.62L256 278.63l-52.69 52.68a16 16 0 01-22.62-22.62L233.37 256l-52.68-52.69a16 16 0 0122.62-22.62L256 233.37l52.69-52.68a16 16 0 0122.62 22.62L278.63 256z" />
@@ -46,7 +46,10 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const emit = defineEmits(['closeModal'])
+
+</script>
 
 <style scoped>
 .login-backdrop {

@@ -50,10 +50,10 @@
             </li>
           </ul>
 
-          <router-link class="flex flex-col items-center gap-y-1" to="/login">
+          <button @click="loggingIn = true" class="flex flex-col items-center gap-y-1" to="/login">
             <div class="w-8 h-8 bg-white rounded-full breakpointtest hover:w-9 hover:h-9 transition-all"></div>
             <p class="text-sm">Login</p>
-          </router-link>
+          </button>
         </nav>
       </div>
     </div>
@@ -108,7 +108,7 @@
       </div>
 
       <div class="relative" v-on:click="searching = false">
-        <Login />
+        <Login v-if="loggingIn === true" @closeModal="loggingIn = false"/>
         <div>
           <router-view></router-view>
         </div>
@@ -128,6 +128,8 @@ const authOptions = {
     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZTFiY2MyZjkyZTQ3ZDM5NmE4ODBkZTg2N2FkNzdjMiIsInN1YiI6IjY1NmEwYzQxNjYxMWI0MDEwMDNkYWE1NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1vMeXlSKGAClK19ROM0E4OjMeTmmBKfZZ_mSq4ovi90'
   }
 };
+
+const loggingIn = ref(true)
 
 const route = useRoute();
 const currentRoute = ref(route.path)
