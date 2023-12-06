@@ -51,7 +51,7 @@
           </ul>
 
           <button @click="loggingIn = true" class="flex flex-col items-center gap-y-1" to="/login">
-            <div class="w-8 h-8 bg-white rounded-full breakpointtest hover:w-9 hover:h-9 transition-all"></div>
+            <div class="w-8 h-8 rounded-full breakpointtest"></div>
             <p class="text-sm">Login</p>
           </button>
         </nav>
@@ -108,9 +108,9 @@
       </div>
 
       <div class="relative" v-on:click="searching = false">
-        <Login v-if="loggingIn === true" @closeModal="loggingIn = false"/>
+        <Login v-if="loggingIn === true" @closeModal="loggingIn = false" />
         <div>
-          <router-view></router-view>
+          <router-view @logIn="loggingIn = true"></router-view>
         </div>
       </div>
     </div>

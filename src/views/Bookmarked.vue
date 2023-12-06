@@ -4,13 +4,13 @@
 
     <div class=" mt-5 ml-2">
       <p class="inline-block mr-4">Already have an account?</p>
-      <button class="inline-block text-gray-600 hover:text-[#b8d4ee] transition-colors">Login</button>
+      <button @click="emit('logIn')" class="inline-block text-gray-600 hover:text-[#b8d4ee] transition-colors">Login</button>
     </div>
   </div>
 </template>
 
 <script setup>
-
+const emit = defineEmits(['logIn'])
 </script>
 
 <style></style>
