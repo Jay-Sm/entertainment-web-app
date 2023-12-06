@@ -107,8 +107,11 @@
         </div>
       </div>
 
-      <div class="" v-on:click="searching = false">
-        <router-view></router-view>
+      <div class="relative" v-on:click="searching = false">
+        <Login />
+        <div>
+          <router-view></router-view>
+        </div>
       </div>
     </div>
   </div>
@@ -116,6 +119,7 @@
 
 <script setup>
 import { watch, watchEffect, ref, toRaw } from 'vue'
+import Login from "./components/Login.vue";
 import { useRoute } from 'vue-router';
 const authOptions = {
   method: 'GET',

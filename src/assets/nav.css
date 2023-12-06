@@ -1,6 +1,6 @@
 /* Nav Bar */
 .nav-bar {
-  @apply fixed top-6 left-6 bottom-24 z-[100] w-[5rem] max-h-[47rem] pt-8 pb-10 bg-theme-light-blue rounded-lg flex flex-col justify-between items-center;
+  @apply fixed top-6 left-6 bottom-24 z-40 w-[5rem] max-h-[47rem] pt-8 pb-10 bg-theme-light-blue rounded-lg flex flex-col justify-between items-center;
   @apply tablet:h-[6rem] tablet:right-6 tablet:w-auto tablet:flex-row tablet:px-8 tablet:py-0;
   @apply mobile:h-[6rem] mobile:right-0 mobile:left-0 mobile:top-0 mobile:w-auto mobile:flex-row mobile:px-8 mobile:py-0 mobile:rounded-none;
 }
