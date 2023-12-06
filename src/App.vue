@@ -129,7 +129,7 @@ const authOptions = {
   }
 };
 
-const loggingIn = ref(true)
+const loggingIn = ref(false)
 
 const route = useRoute();
 const currentRoute = ref(route.path)

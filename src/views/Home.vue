@@ -14,62 +14,13 @@
         </div>
 
         <div class="mt-5">
-          <Flicking v-if="discoverMovies.length < 3" class="w-full h-[14rem]"
+          <Flicking class="w-full h-[14rem]"
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
-            <div v-for="(item, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="i"
-              class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
-              <div
-                class="absolute top-0 bottom-0 right-0 left-0 border-2 bg-gray-700 opacity-10 animate-pulse rounded-lg">
-              </div>
-              <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 Movie
-              </div>
-              <div class="text-xl relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full mt-2">xXxXx
-                XxXxX xXxX</div>
-            </div>
-          </Flicking>
-
-          <Flicking v-if="discoverMovies.length > 3" class="w-full h-[14rem]"
-            :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
-            @move-end="onMoveEnd">
-
-            <div v-for="(movie, index) in discoverMovies" :key="index"
-              class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
-              <img :src="movie.image"
-                class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
-              <div class="relative z-10">
-                {{ movie.releaseYear }} &#x2022 Movie
-              </div>
-              <div class="text-xl relative z-10 truncate">
-                {{ movie.title }}
-              </div>
-
-              <!--  -->
-              <div class="title-options">
-                <button class="absolute top-3 right-3 flex justify-center items-center bg-gray-900 p-2 rounded-full">
-                  <svg v-if="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff"
-                    class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 16 16">
-                    <path
-                      d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
-                  </svg>
-                  <svg v-else class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                    viewBox="0 0 16 16">
-                    <path fill="#fff"
-                      d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
-                  </svg>
-                </button>
-
-                <a :href="movie.link" target="_blank"
-                  class="flex flex-row items-center gap-x-3 bg-[#ffffff74] px-3 py-2 rounded-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="w-[1.8rem] h-[1.8rem]" viewBox="0 0 16 16">
-                    <path
-                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5" />
-                  </svg>
-                  <p class="text-lg font-normal">Play</p>
-                </a>
-              </div>
+            <div v-for="(title, index) in discoverMovies" :key="index">
+              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" :name="title.name" :year="title.releaseYear"
+                :image="title.image" :link="title.link" :type="title.type" />
             </div>
           </Flicking>
         </div>
@@ -81,54 +32,15 @@
             Popular
             <div class="label-movie">MOVIE</div>
           </h2>
-
           <router-link to="/movie" class="text-theme-light-blue2 font-medium text-[0.8rem] hover:underline">
             SEE MORE
           </router-link>
         </div>
 
-        <div v-if="popularMovies.length < 1" class="grid-popular">
-          <div v-for="(item, i) in [0, 1, 2, 3, 4, 5]" :key="i" class="title-tile" :class="popularIndex(i)">
-            <div class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
-            </div>
-            <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 Movie
-            </div>
-            <div class="text-xl relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full mt-2">xXxXx
-              XxXxX xXxX</div>
-          </div>
-        </div>
-
-        <div v-else class="grid-popular">
-          <div v-for="(movie, index) in popularMovies" :key="index" class="title-tile" :class="popularIndex(index)">
-            <img :src="movie.image"
-              class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
-            <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>
-            <div class="text-xl relative z-10 truncate">{{ movie.title }}</div>
-
-            <div class="title-options">
-              <button class="absolute top-3 right-3 flex justify-center items-center bg-gray-900 p-2 rounded-full">
-                <svg v-if="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff"
-                  class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 16 16">
-                  <path
-                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
-                </svg>
-                <svg v-else class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                  viewBox="0 0 16 16">
-                  <path fill="#fff"
-                    d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
-                </svg>
-              </button>
-
-              <a :href="movie.link" target="_blank"
-                class="flex flex-row items-center gap-x-3 bg-[#ffffff74] px-3 py-2 rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                  class="w-[1.8rem] h-[1.8rem]" viewBox="0 0 16 16">
-                  <path
-                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5" />
-                </svg>
-                <p class="text-lg font-normal">Play</p>
-              </a>
-            </div>
+        <div class="grid-popular">
+          <div v-for="(title, index) in popularMovies" :key="index" :class="popularIndex(index)">
+            <Title :name="title.name" :year="title.releaseYear" :image="title.image" :link="title.link"
+              :type="title.type" />
           </div>
         </div>
       </div>
@@ -144,51 +56,10 @@
           </router-link>
         </div>
 
-        <div>
-          <div v-if="topRatedMovies.length < 1" class="rated-container">
-            <div v-for="(item, i) in [1, 2, 3]" :key="i" class="title-tile">
-              <div
-                class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
-              </div>
-              <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 Movie
-              </div>
-              <div class="text-xl relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full mt-2">xXxXx
-                XxXxX xXxX</div>
-            </div>
-          </div>
-
-          <div v-else class="rated-container">
-            <div v-for="(movie, index) in topRatedMovies" :key="index" class="title-tile">
-              <img :src="movie.image"
-                class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
-              <div class="relative z-10">{{ movie.releaseYear }} &#x2022 Movie</div>
-              <div class="text-xl relative z-10 truncate">{{ movie.title }}</div>
-
-              <div class="title-options">
-                <button class="absolute top-3 right-3 flex justify-center items-center bg-gray-900 p-2 rounded-full">
-                  <svg v-if="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff"
-                    class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 16 16">
-                    <path
-                      d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
-                  </svg>
-                  <svg v-else class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                    viewBox="0 0 16 16">
-                    <path fill="#fff"
-                      d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
-                  </svg>
-                </button>
-
-                <a :href="movie.link" target="_blank"
-                  class="flex flex-row items-center gap-x-3 bg-[#ffffff74] px-3 py-2 rounded-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="w-[1.8rem] h-[1.8rem]" viewBox="0 0 16 16">
-                    <path
-                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5" />
-                  </svg>
-                  <p class="text-lg font-normal">Play</p>
-                </a>
-              </div>
-            </div>
+        <div class="rated-container">
+          <div v-for="(title, index) in topRatedMovies" :key="index" class="w-full">
+            <Title class="" :name="title.name" :year="title.releaseYear" :image="title.image" :link="title.link"
+              :type="title.type" />
           </div>
         </div>
       </div>
@@ -208,62 +79,13 @@
         </div>
 
         <div class="mt-5">
-          <Flicking v-if="discoverSeries.length < 1" class="w-full h-[14rem]"
+          <Flicking class="w-full h-[14rem]"
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
-            <div v-for="(item, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="i"
-              class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
-              <div
-                class="absolute top-0 bottom-0 right-0 left-0 border-2 bg-gray-700 opacity-10 animate-pulse rounded-lg">
-              </div>
-              <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 TV
-                Series
-              </div>
-              <div class="text-xl relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full mt-2">xXxXx
-                XxXxX xXxX</div>
-            </div>
-          </Flicking>
-
-          <Flicking v-if="discoverSeries.length > 1" class="w-full h-[14rem]"
-            :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
-            @move-end="onMoveEnd">
-
-            <div v-for="(series, index) in discoverSeries" :key="index"
-              class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
-              <img :src="series.image"
-                class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
-              <div class="relative z-10">
-                {{ series.releaseYear }} &#x2022 TV Series
-              </div>
-              <div class="text-xl relative z-10 truncate">
-                {{ series.title }}
-              </div>
-
-              <div class="title-options">
-                <button class="absolute top-3 right-3 flex justify-center items-center bg-gray-900 p-2 rounded-full">
-                  <svg v-if="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff"
-                    class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 16 16">
-                    <path
-                      d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
-                  </svg>
-                  <svg v-else class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                    viewBox="0 0 16 16">
-                    <path fill="#fff"
-                      d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
-                  </svg>
-                </button>
-
-                <a :href="series.link" target="_blank"
-                  class="flex flex-row items-center gap-x-3 bg-[#ffffff74] px-3 py-2 rounded-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="w-[1.8rem] h-[1.8rem]" viewBox="0 0 16 16">
-                    <path
-                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5" />
-                  </svg>
-                  <p class="text-lg font-normal">Play</p>
-                </a>
-              </div>
+            <div v-for="(title, index) in discoverSeries" :key="index">
+              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" :name="title.name" :year="title.releaseYear"
+                :image="title.image" :link="title.link" :type="title.type" />
             </div>
           </Flicking>
         </div>
@@ -281,49 +103,10 @@
           </router-link>
         </div>
 
-        <div v-if="popularSeries.length < 1" class="grid-popular">
-          <div v-for="(item, i) in [0, 1, 2, 3, 4, 5]" :key="i" class="title-tile" :class="popularIndex(i)">
-            <div class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
-            </div>
-            <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 TV
-              Series
-            </div>
-            <div class="text-xl relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full mt-2">xXxXx
-              XxXxX xXxX</div>
-          </div>
-        </div>
-
-        <div v-else class="grid-popular">
-          <div v-for="(series, index) in popularSeries" :key="index" class="title-tile" :class="popularIndex(index)">
-            <img :src="series.image"
-              class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
-            <div class="relative z-10">{{ series.releaseYear }} &#x2022 TV Series</div>
-            <div class="text-xl relative z-10 truncate">{{ series.title }}</div>
-
-            <div class="title-options">
-              <button class="absolute top-3 right-3 flex justify-center items-center bg-gray-900 p-2 rounded-full">
-                <svg v-if="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff"
-                  class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 16 16">
-                  <path
-                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
-                </svg>
-                <svg v-else class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                  viewBox="0 0 16 16">
-                  <path fill="#fff"
-                    d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
-                </svg>
-              </button>
-
-              <a :href="series.link" target="_blank"
-                class="flex flex-row items-center gap-x-3 bg-[#ffffff74] px-3 py-2 rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                  class="w-[1.8rem] h-[1.8rem]" viewBox="0 0 16 16">
-                  <path
-                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5" />
-                </svg>
-                <p class="text-lg font-normal">Play</p>
-              </a>
-            </div>
+        <div class="grid-popular">
+          <div v-for="(title, index) in popularSeries" :key="index" :class="popularIndex(index)">
+            <Title :name="title.name" :year="title.releaseYear" :image="title.image" :link="title.link"
+              :type="title.type" />
           </div>
         </div>
       </div>
@@ -339,52 +122,10 @@
           </router-link>
         </div>
 
-        <div>
-          <div v-if="topRatedSeries.length < 1" class="rated-container">
-            <div v-for="(item, i) in [1, 2, 3]" :key="i" class="title-tile">
-              <div
-                class="absolute top-0 bottom-0 right-0 left-0 bg-gray-700 opacity-10 border-2 animate-pulse rounded-lg">
-              </div>
-              <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 TV
-                Series
-              </div>
-              <div class="text-xl relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full mt-2">xXxXx
-                XxXxX xXxX</div>
-            </div>
-          </div>
-
-          <div v-else class="rated-container">
-            <div v-for="(series, index) in topRatedSeries" :key="index" class="title-tile">
-              <img :src="series.image"
-                class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
-              <div class="relative z-10">{{ series.releaseYear }} &#x2022 TV Series</div>
-              <div class="text-xl relative z-10 truncate">{{ series.title }}</div>
-
-              <div class="title-options">
-                <button class="absolute top-3 right-3 flex justify-center items-center bg-gray-900 p-2 rounded-full">
-                  <svg v-if="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff"
-                    class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 16 16">
-                    <path
-                      d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
-                  </svg>
-                  <svg v-else class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                    viewBox="0 0 16 16">
-                    <path fill="#fff"
-                      d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
-                  </svg>
-                </button>
-
-                <a :href="series.link" target="_blank"
-                  class="flex flex-row items-center gap-x-3 bg-[#ffffff74] px-3 py-2 rounded-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="w-[1.8rem] h-[1.8rem]" viewBox="0 0 16 16">
-                    <path
-                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5" />
-                  </svg>
-                  <p class="text-lg font-normal">Play</p>
-                </a>
-              </div>
-            </div>
+        <div class="rated-container">
+          <div v-for="(title, index) in topRatedSeries" :key="index" class="w-full">
+            <Title class="" :name="title.name" :year="title.releaseYear" :image="title.image" :link="title.link"
+              :type="title.type" />
           </div>
         </div>
 
@@ -403,62 +144,13 @@
         </div>
 
         <div class="mt-5">
-          <Flicking v-if="airingToday.length < 1" class="w-full h-[14rem]"
+          <Flicking class="w-full h-[14rem]"
             :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
             @move-end="onMoveEnd">
 
-            <div v-for="(item, i) in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="i"
-              class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
-              <div
-                class="absolute top-0 bottom-0 right-0 left-0 border-2 bg-gray-700 opacity-10 animate-pulse rounded-lg">
-              </div>
-              <div class="relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full">0000 &#x2022 TV
-                Series
-              </div>
-              <div class="text-xl relative z-10 bg-gray-700 opacity-30 max-w-fit text-transparent rounded-full mt-2">xXxXx
-                XxXxX xXxX</div>
-            </div>
-          </Flicking>
-
-          <Flicking v-if="airingToday.length > 1" class="w-full h-[14rem]"
-            :options="{ align: 'center', circular: true, easing: x => 1 - Math.pow(1 - x, 2.1), deceleration: 0.035 }"
-            @move-end="onMoveEnd">
-
-            <div v-for="(series, index) in airingToday" :key="index"
-              class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10 title-tile">
-              <img :src="series.image"
-                class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
-              <div class="relative z-10">
-                {{ series.releaseYear }} &#x2022 TV Series
-              </div>
-              <div class="text-xl relative z-10 truncate">
-                {{ series.title }}
-              </div>
-
-              <div class="title-options">
-                <button class="absolute top-3 right-3 flex justify-center items-center bg-gray-900 p-2 rounded-full">
-                  <svg v-if="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff"
-                    class="w-[1.1rem] h-[1.1rem]" viewBox="0 0 16 16">
-                    <path
-                      d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
-                  </svg>
-                  <svg v-else class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                    viewBox="0 0 16 16">
-                    <path fill="#fff"
-                      d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
-                  </svg>
-                </button>
-
-                <a :href="series.link" target="_blank"
-                  class="flex flex-row items-center gap-x-3 bg-[#ffffff74] px-3 py-2 rounded-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="w-[1.8rem] h-[1.8rem]" viewBox="0 0 16 16">
-                    <path
-                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5" />
-                  </svg>
-                  <p class="text-lg font-normal">Play</p>
-                </a>
-              </div>
+            <div v-for="(title, index) in airingToday" :key="index">
+              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" :name="title.name" :year="title.releaseYear"
+                :image="title.image" :link="title.link" :type="title.type" />
             </div>
           </Flicking>
         </div>
@@ -475,6 +167,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import Title from '../components/Title.vue'
 const authOptions = {
   method: 'GET',
   headers: {
@@ -507,10 +200,11 @@ async function getDiscoverMovies() {
       const providerLink = provResOBJ.results['US'].link
 
       discoverMovies.value.push({
-        title: movie.title,
+        name: movie.title,
         releaseYear: movie.release_date.slice(0, 4),
         image: "https://image.tmdb.org/t/p/original" + filePath,
-        link: providerLink
+        link: providerLink,
+        type: 'Movie'
       })
     }
   }
@@ -536,10 +230,11 @@ async function getPopularMovies() {
       const providerLink = provResOBJ.results['US'].link
 
       popularMovies.value.push({
-        title: movie.title,
+        name: movie.title,
         releaseYear: movie.release_date.slice(0, 4),
         image: "https://image.tmdb.org/t/p/original" + filePath,
-        link: providerLink
+        link: providerLink,
+        type: 'Movie'
       })
     }
   }
@@ -565,10 +260,11 @@ async function getTopRatedMovies() {
       const providerLink = provResOBJ.results['US'].link
 
       topRatedMovies.value.push({
-        title: movie.title,
+        name: movie.title,
         releaseYear: movie.release_date.slice(0, 4),
         image: "https://image.tmdb.org/t/p/original" + filePath,
-        link: providerLink
+        link: providerLink,
+        type: 'Movie'
       })
     }
   }
@@ -592,10 +288,11 @@ async function getDiscoverSeries() {
       const providerLink = provResOBJ.results['US'].link
 
       discoverSeries.value.push({
-        title: series.name,
+        name: series.name,
         releaseYear: series.first_air_date.slice(0, 4),
         image: "https://image.tmdb.org/t/p/original" + series.backdrop_path,
-        link: providerLink
+        link: providerLink,
+        type: "TV Series"
       })
     }
   }
@@ -617,10 +314,11 @@ async function getPopularSeries() {
       const providerLink = provResOBJ.results['US'].link
 
       popularSeries.value.push({
-        title: series.name,
+        name: series.name,
         releaseYear: series.first_air_date.slice(0, 4),
         image: "https://image.tmdb.org/t/p/original" + series.backdrop_path,
-        link: providerLink
+        link: providerLink,
+        type: "TV Series"
       })
     }
   }
@@ -642,10 +340,11 @@ async function getTopRatedSeries() {
       const providerLink = provResOBJ.results['US'].link
 
       topRatedSeries.value.push({
-        title: series.name,
+        name: series.name,
         releaseYear: series.first_air_date.slice(0, 4),
         image: "https://image.tmdb.org/t/p/original" + series.backdrop_path,
-        link: providerLink
+        link: providerLink,
+        type: "TV Series"
       })
     }
   }
@@ -667,10 +366,11 @@ async function getAiring() {
       const providerLink = provResOBJ.results['US'].link
 
       airingToday.value.push({
-        title: series.name,
+        name: series.name,
         releaseYear: series.first_air_date.slice(0, 4),
         image: "https://image.tmdb.org/t/p/original" + series.backdrop_path,
-        link: providerLink
+        link: providerLink,
+        type: "TV Series"
       })
     }
   }

@@ -5,7 +5,7 @@
 }
 
 .genre-option {
-  @apply w-full min-w-max transition-all pl-4 border-l-[1px] border-[#ffffff53] flex justify-start items-center text-xl tracking-wider text-gray-400 hover:text-gray-200;
+  @apply w-full min-w-max transition-all pl-4 border-l-[1px] border-[#ffffff53] flex justify-start items-center text-xl tracking-wider text-gray-400 hover:text-gray-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:text-gray-400;
   @apply mobile:mx-1 mobile:ml-4 mobile:max-w-fit mobile:border-[2px] mobile:rounded-full mobile:justify-center mobile:items-center mobile:px-2 mobile:py-1;
 }
 
@@ -24,5 +24,5 @@
 }
 
 .page-selection button {
-  @apply w-full h-full flex flex-row items-center gap-x-2 hover:gap-x-3 transition-all;
+  @apply w-full h-full flex flex-row items-center gap-x-2 hover:gap-x-3 transition-all disabled:gap-x-0 disabled:cursor-not-allowed;
 }
