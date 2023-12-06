@@ -118,7 +118,7 @@
 </template>
 
 <script setup>
-import { watch, watchEffect, ref, toRaw } from 'vue'
+import { watch, ref } from 'vue'
 import Login from "./components/Login.vue";
 import { useRoute } from 'vue-router';
 const authOptions = {
@@ -136,8 +136,6 @@ const currentRoute = ref(route.path)
 watch(() => route.path, (newPath, oldPath) => {
   currentRoute.value = newPath
 });
-
-// 
 
 const searching = ref(false)
 function changeSearch(route) {
