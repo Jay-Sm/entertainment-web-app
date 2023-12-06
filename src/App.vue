@@ -136,7 +136,7 @@ const authOptions = {
 };
 
 const loggingIn = ref(false)
-const creatingAccount = ref(true)
+const creatingAccount = ref(false)
 
 const route = useRoute();
 const currentRoute = ref(route.path)
