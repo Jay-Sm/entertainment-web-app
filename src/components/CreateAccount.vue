@@ -40,19 +40,22 @@
 
 <script setup>
 import { ref } from 'vue'
-import { auth } from '../firebase/firebase'
+import { auth, db } from '../firebase/firebase'
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 const emit = defineEmits(['closeCreateAcc', 'logIn'])
 
 const email = ref('')
 const password = ref('')
-function firebaseCreateAcc() {
+async function firebaseCreateAcc() {
   createUserWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
       const user = userCredential.user;
 
-      console.log(user);
+      setDoc(doc(db, "user_bookmarks", user.uid), {
+      });
+
     })
     .catch((error) => {
       const errorCode = error.code;

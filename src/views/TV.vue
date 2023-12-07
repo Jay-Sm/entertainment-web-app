@@ -21,8 +21,8 @@
       <div v-if="currentGenreID"
         class="grid grid-cols-3 mobile:grid-cols-2 tablet:grid-cols-2 small:grid-cols-2 gap-4 w-full">
         <div v-for="(title, index) in genreSeries" :key="index" class="">
-          <Title class="" :name="title.name" :year="title.releaseYear" :image="title.image" :link="title.link"
-            :type="title.type" />
+          <Title class="" :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image"
+            :link="title.link" :type="title.type" :bookmarks="bookmarkedTitles" />
         </div>
       </div>
 
@@ -119,6 +119,7 @@ async function searchSeries() {
 
       genreSeries.value.push({
         title: series.name,
+        id: movie.id,
         releaseYear: series.first_air_date.slice(0, 4),
         image: "https://image.tmdb.org/t/p/original" + series.backdrop_path,
         link: providerLink,

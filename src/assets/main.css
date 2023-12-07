@@ -36,22 +36,3 @@ body {
   @apply xxl:bg-[#f58080];
   @apply tv:bg-white;
 }
-
-/* Movie & Series Containers/Tiles */
-
-.title-tile {
-  @apply w-full h-[14rem] rounded-lg flex flex-col justify-end p-4 relative overflow-hidden;
-}
-
-.title-tile div {
-  @apply select-none
-}
-
-.title-options {
-  @apply absolute opacity-0 top-[-100%] h-0 right-0 w-full flex justify-center items-center z-20 bg-[#00000090];
-  @apply transition-all duration-[450ms] delay-500;
-}
-
-.title-tile:hover .title-options {
-  @apply opacity-100 h-full top-0;
-}

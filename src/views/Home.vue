@@ -19,8 +19,9 @@
             @move-end="onMoveEnd">
 
             <div v-for="(title, index) in discoverMovies" :key="index">
-              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" :name="title.name" :year="title.releaseYear"
-                :image="title.image" :link="title.link" :type="title.type" />
+              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" :name="title.name" :id="title.id"
+                :year="title.releaseYear" :image="title.image" :link="title.link" :type="title.type"
+                :bookmarks="bookmarkedTitles" />
             </div>
           </Flicking>
         </div>
@@ -39,8 +40,8 @@
 
         <div class="grid-popular">
           <div v-for="(title, index) in popularMovies" :key="index" :class="popularIndex(index)">
-            <Title :name="title.name" :year="title.releaseYear" :image="title.image" :link="title.link"
-              :type="title.type" />
+            <Title :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image" :link="title.link"
+              :type="title.type" :bookmarks="bookmarkedTitles" />
           </div>
         </div>
       </div>
@@ -58,8 +59,8 @@
 
         <div class="rated-container">
           <div v-for="(title, index) in topRatedMovies" :key="index" class="w-full">
-            <Title class="" :name="title.name" :year="title.releaseYear" :image="title.image" :link="title.link"
-              :type="title.type" />
+            <Title class="" :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image"
+              :link="title.link" :type="title.type" :bookmarks="bookmarkedTitles" />
           </div>
         </div>
       </div>
@@ -84,8 +85,9 @@
             @move-end="onMoveEnd">
 
             <div v-for="(title, index) in discoverSeries" :key="index">
-              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" :name="title.name" :year="title.releaseYear"
-                :image="title.image" :link="title.link" :type="title.type" />
+              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" :name="title.name" :id="title.id"
+                :year="title.releaseYear" :image="title.image" :link="title.link" :type="title.type"
+                :bookmarks="bookmarkedTitles" />
             </div>
           </Flicking>
         </div>
@@ -105,8 +107,8 @@
 
         <div class="grid-popular">
           <div v-for="(title, index) in popularSeries" :key="index" :class="popularIndex(index)">
-            <Title :name="title.name" :year="title.releaseYear" :image="title.image" :link="title.link"
-              :type="title.type" />
+            <Title :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image" :link="title.link"
+              :type="title.type" :bookmarks="bookmarkedTitles" />
           </div>
         </div>
       </div>
@@ -124,8 +126,8 @@
 
         <div class="rated-container">
           <div v-for="(title, index) in topRatedSeries" :key="index" class="w-full">
-            <Title class="" :name="title.name" :year="title.releaseYear" :image="title.image" :link="title.link"
-              :type="title.type" />
+            <Title class="" :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image"
+              :link="title.link" :type="title.type" :bookmarks="bookmarkedTitles" />
           </div>
         </div>
 
@@ -149,8 +151,9 @@
             @move-end="onMoveEnd">
 
             <div v-for="(title, index) in airingToday" :key="index">
-              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" :name="title.name" :year="title.releaseYear"
-                :image="title.image" :link="title.link" :type="title.type" />
+              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" :name="title.name" :id="title.id"
+                :year="title.releaseYear" :image="title.image" :link="title.link" :type="title.type"
+                :bookmarks="bookmarkedTitles" />
             </div>
           </Flicking>
         </div>
@@ -166,7 +169,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, toRaw } from 'vue'
+import { getBookmarked } from '../composables/getBookmarkedTitles'
 import Title from '../components/Title.vue'
 const authOptions = {
   method: 'GET',
@@ -178,6 +182,9 @@ const authOptions = {
 function popularIndex(index) {
   return `tile${index + 1}`
 }
+
+const bookmarkedTitles = getBookmarked()
+
 
 // Movies
 const discoverMovies = ref([])
@@ -199,8 +206,10 @@ async function getDiscoverMovies() {
       const filePath = `${imgResOBJ.backdrops[0].file_path}`
       const providerLink = provResOBJ.results['US'].link
 
+
       discoverMovies.value.push({
         name: movie.title,
+        id: movie.id,
         releaseYear: movie.release_date.slice(0, 4),
         image: "https://image.tmdb.org/t/p/original" + filePath,
         link: providerLink,
@@ -231,6 +240,7 @@ async function getPopularMovies() {
 
       popularMovies.value.push({
         name: movie.title,
+        id: movie.id,
         releaseYear: movie.release_date.slice(0, 4),
         image: "https://image.tmdb.org/t/p/original" + filePath,
         link: providerLink,
@@ -261,6 +271,7 @@ async function getTopRatedMovies() {
 
       topRatedMovies.value.push({
         name: movie.title,
+        id: movie.id,
         releaseYear: movie.release_date.slice(0, 4),
         image: "https://image.tmdb.org/t/p/original" + filePath,
         link: providerLink,
@@ -289,6 +300,7 @@ async function getDiscoverSeries() {
 
       discoverSeries.value.push({
         name: series.name,
+        id: series.id,
         releaseYear: series.first_air_date.slice(0, 4),
         image: "https://image.tmdb.org/t/p/original" + series.backdrop_path,
         link: providerLink,
@@ -315,6 +327,7 @@ async function getPopularSeries() {
 
       popularSeries.value.push({
         name: series.name,
+        id: series.id,
         releaseYear: series.first_air_date.slice(0, 4),
         image: "https://image.tmdb.org/t/p/original" + series.backdrop_path,
         link: providerLink,
@@ -341,6 +354,7 @@ async function getTopRatedSeries() {
 
       topRatedSeries.value.push({
         name: series.name,
+        id: series.id,
         releaseYear: series.first_air_date.slice(0, 4),
         image: "https://image.tmdb.org/t/p/original" + series.backdrop_path,
         link: providerLink,
@@ -367,6 +381,7 @@ async function getAiring() {
 
       airingToday.value.push({
         name: series.name,
+        id: series.id,
         releaseYear: series.first_air_date.slice(0, 4),
         image: "https://image.tmdb.org/t/p/original" + series.backdrop_path,
         link: providerLink,
