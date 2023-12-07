@@ -3,7 +3,7 @@
 }
 
 .login-container {
-  @apply h-[65%] w-[31%] max-w-[40rem] bg-background-dark-blue border rounded border-theme-light-blue2 top-1/4 left-[20%] z-50 p-2;
+  @apply h-[28.75rem] min-w-[30rem] max-w-[40rem] bg-background-dark-blue border rounded border-theme-light-blue2 top-1/4 left-[20%] z-50 p-2;
 }
 
 .login-input {

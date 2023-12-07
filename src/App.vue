@@ -50,9 +50,14 @@
             </li>
           </ul>
 
-          <button @click="loggingIn = true" class="flex flex-col items-center gap-y-1" to="/login">
+          <button v-if="!loggedIn" @click="loggingIn = true" class="flex flex-col items-center gap-y-1" to="/login">
             <div class="w-8 h-8 rounded-full breakpointtest"></div>
-            <p class="text-sm">Login</p>
+            <p class="text-sm">Log In</p>
+          </button>
+
+          <button v-else @click="firebaseLogOut()" class="flex flex-col items-center gap-y-1" to="/login">
+            <div class="w-8 h-8 rounded-full breakpointtest"></div>
+            <p class="text-sm">Log Out</p>
           </button>
         </nav>
       </div>
@@ -125,6 +130,9 @@
 import { watch, ref } from 'vue'
 import { useRoute } from 'vue-router';
 
+import { auth } from "./firebase/firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+
 import CreateAccount from './components/CreateAccount.vue'
 import Login from "./components/Login.vue";
 const authOptions = {
@@ -137,6 +145,28 @@ const authOptions = {
 
 const loggingIn = ref(false)
 const creatingAccount = ref(false)
+
+const loggedIn = ref(false)
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const uid = user.uid;
+    loggedIn.value = true
+
+  } else {
+    loggedIn.value = false
+
+  }
+});
+
+function firebaseLogOut() {
+  signOut(auth)
+    .then(() => {
+      location.reload()
+    })
+    .catch((error) => {
+      // An error happened.
+    });
+}
 
 const route = useRoute();
 const currentRoute = ref(route.path)
