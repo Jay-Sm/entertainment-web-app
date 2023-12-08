@@ -8,19 +8,32 @@
     <div v-if="!loading" class="text-xl relative z-10 truncate">{{ props.name }}</div>
 
     <div class="title-options" v-if="!loading">
-      <button v-if="toRaw(props.bookmarks[props.type]).includes(props.id)" @click="removeBookmark(props.id, props.type);" class="">
-        <svg class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-          <path fill="#fff"
-            d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
-        </svg>
-      </button>
-      <button v-else @click="addBookmark(props.id, props.type);" class="">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" class="w-[1.1rem] h-[1.1rem]"
-          viewBox="0 0 16 16">
-          <path
-            d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
-        </svg>
-      </button>
+      <div v-if="props.bookmarks !== undefined">
+        <button v-if="toRaw(props.bookmarks[props.type]).includes(props.id)"
+          @click="removeBookmark(props.id, props.type);" class="">
+          <svg class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+            viewBox="0 0 16 16">
+            <path fill="#fff"
+              d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
+          </svg>
+        </button>
+        <button v-else @click="addBookmark(props.id, props.type);" class="">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" class="w-[1.1rem] h-[1.1rem]"
+            viewBox="0 0 16 16">
+            <path
+              d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
+          </svg>
+        </button>
+      </div>
+      <div v-else>
+        <button @click="emit('logIn')" class="">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" class="w-[1.1rem] h-[1.1rem]"
+            viewBox="0 0 16 16">
+            <path
+              d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
+          </svg>
+        </button>
+      </div>
 
       <a :href="props.link" target="_blank"
         class="flex flex-row items-center gap-x-3 bg-[#ffffff74] px-3 py-2 rounded-full">
@@ -41,15 +54,9 @@ import Loader from '../components/Loader.vue'
 import { addBookmark } from '../composables/addBookmark';
 import { removeBookmark } from '../composables/removeBookmark';
 
+const emit = defineEmits(['logIn'])
 const props = defineProps(['name', 'id', 'year', 'image', 'link', 'type', 'bookmarks'])
 const loading = ref(true)
-
-
-// watch(
-//   () => toRaw(props.bookmarks[props.type]),
-//   (newValue, oldValue) => { console.log(newValue) },
-//   { immediate: true }
-// )
 
 function loadingDone(event) {
   event.target.classList.add('invisible')

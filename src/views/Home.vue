@@ -19,7 +19,7 @@
             @move-end="onMoveEnd">
 
             <div v-for="(title, index) in discoverMovies" :key="index">
-              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" :name="title.name" :id="title.id"
+              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" @logIn="emit('logIn')" :name="title.name" :id="title.id"
                 :year="title.releaseYear" :image="title.image" :link="title.link" :type="title.type"
                 :bookmarks="bookmarkedTitles" />
             </div>
@@ -40,7 +40,7 @@
 
         <div class="grid-popular">
           <div v-for="(title, index) in popularMovies" :key="index" :class="popularIndex(index)">
-            <Title :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image" :link="title.link"
+            <Title @logIn="emit('logIn')" :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image" :link="title.link"
               :type="title.type" :bookmarks="bookmarkedTitles" />
           </div>
         </div>
@@ -59,7 +59,7 @@
 
         <div class="rated-container">
           <div v-for="(title, index) in topRatedMovies" :key="index" class="w-full">
-            <Title class="" :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image"
+            <Title class="" @logIn="emit('logIn')" :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image"
               :link="title.link" :type="title.type" :bookmarks="bookmarkedTitles" />
           </div>
         </div>
@@ -85,7 +85,7 @@
             @move-end="onMoveEnd">
 
             <div v-for="(title, index) in discoverSeries" :key="index">
-              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" :name="title.name" :id="title.id"
+              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" @logIn="emit('logIn')" :name="title.name" :id="title.id"
                 :year="title.releaseYear" :image="title.image" :link="title.link" :type="title.type"
                 :bookmarks="bookmarkedTitles" />
             </div>
@@ -107,7 +107,7 @@
 
         <div class="grid-popular">
           <div v-for="(title, index) in popularSeries" :key="index" :class="popularIndex(index)">
-            <Title :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image" :link="title.link"
+            <Title @logIn="emit('logIn')" :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image" :link="title.link"
               :type="title.type" :bookmarks="bookmarkedTitles" />
           </div>
         </div>
@@ -126,7 +126,7 @@
 
         <div class="rated-container">
           <div v-for="(title, index) in topRatedSeries" :key="index" class="w-full">
-            <Title class="" :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image"
+            <Title class="" @logIn="emit('logIn')" :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image"
               :link="title.link" :type="title.type" :bookmarks="bookmarkedTitles" />
           </div>
         </div>
@@ -151,7 +151,7 @@
             @move-end="onMoveEnd">
 
             <div v-for="(title, index) in airingToday" :key="index">
-              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" :name="title.name" :id="title.id"
+              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" @logIn="emit('logIn')" :name="title.name" :id="title.id"
                 :year="title.releaseYear" :image="title.image" :link="title.link" :type="title.type"
                 :bookmarks="bookmarkedTitles" />
             </div>
@@ -184,10 +184,16 @@ const authOptions = {
 function popularIndex(index) {
   return `tile${index + 1}`
 }
+const emit = defineEmits(['logIn'])
 
 const bookmarkedTitles = ref({})
 function updateBookmarked(obj) {
-  bookmarkedTitles.value = obj
+  if (typeof (obj) === 'object') {
+    bookmarkedTitles.value = obj
+  }
+  else {
+    bookmarkedTitles.value = undefined
+  }
 }
 onAuthStateChanged(auth, async (user) => {
   if (user) {
@@ -197,6 +203,8 @@ onAuthStateChanged(auth, async (user) => {
       const data = doc.data()
       updateBookmarked({ "Movie": data['bookmarked_movies'], "TV Series": data['bookmarked_series'] })
     });
+  } else {
+    updateBookmarked(undefined)
   }
 });
 
