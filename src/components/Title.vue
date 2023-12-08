@@ -8,7 +8,7 @@
     <div v-if="!loading" class="text-xl relative z-10 truncate">{{ props.name }}</div>
 
     <div class="title-options" v-if="!loading">
-      <button v-if="props.bookmarks[props.type].includes(props.id)" @click="removeBookmark(props.id, props.type);" class="">
+      <button v-if="toRaw(props.bookmarks[props.type]).includes(props.id)" @click="removeBookmark(props.id, props.type);" class="">
         <svg class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
           <path fill="#fff"
             d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
@@ -44,6 +44,13 @@ import { removeBookmark } from '../composables/removeBookmark';
 const props = defineProps(['name', 'id', 'year', 'image', 'link', 'type', 'bookmarks'])
 const loading = ref(true)
 
+
+// watch(
+//   () => toRaw(props.bookmarks[props.type]),
+//   (newValue, oldValue) => { console.log(newValue) },
+//   { immediate: true }
+// )
+
 function loadingDone(event) {
   event.target.classList.add('invisible')
 
@@ -52,17 +59,6 @@ function loadingDone(event) {
     event.target.classList.remove('invisible')
   }, 1000);
 }
-
-
-
-
-const bookmarkList = ref([])
-function sortBookmark() {
-  bookmarkList.value = toRaw(props.bookmarks[props.type])
-
-  console.log(toRaw(bookmarkList.value));
-}
-
 
 </script>
 

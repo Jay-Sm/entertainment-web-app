@@ -169,8 +169,10 @@
 </template>
 
 <script setup>
-import { ref, toRaw } from 'vue'
-import { getBookmarked } from '../composables/getBookmarkedTitles'
+import { ref, toRaw, watch } from 'vue'
+import { db, auth } from "../firebase/firebase";
+import { doc, onSnapshot } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 import Title from '../components/Title.vue'
 const authOptions = {
   method: 'GET',
@@ -183,7 +185,20 @@ function popularIndex(index) {
   return `tile${index + 1}`
 }
 
-const bookmarkedTitles = getBookmarked()
+const bookmarkedTitles = ref({})
+function updateBookmarked(obj) {
+  bookmarkedTitles.value = obj
+}
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const userBookmarkDoc = doc(db, "user_bookmarks", user.uid);
+
+    onSnapshot(userBookmarkDoc, (doc) => {
+      const data = doc.data()
+      updateBookmarked({ "Movie": data['bookmarked_movies'], "TV Series": data['bookmarked_series'] })
+    });
+  }
+});
 
 
 // Movies

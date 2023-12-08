@@ -57,8 +57,27 @@
 
 <script setup>
 import { ref } from 'vue'
+import { db, auth } from "../firebase/firebase";
+import { doc, onSnapshot } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 import Title from '../components/Title.vue'
 import Flicking from '@egjs/vue3-flicking';
+
+const bookmarkedTitles = ref({})
+function updateBookmarked(obj) {
+  bookmarkedTitles.value = obj
+}
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const userBookmarkDoc = doc(db, "user_bookmarks", user.uid);
+
+    onSnapshot(userBookmarkDoc, (doc) => {
+      const data = doc.data()
+      updateBookmarked({ "Movie": data['bookmarked_movies'], "TV Series": data['bookmarked_series'] })
+    });
+  }
+});
+
 
 const windowWidth = ref(window.innerWidth)
 window.addEventListener('resize', function (e) {
@@ -118,8 +137,8 @@ async function searchSeries() {
       const providerLink = provResOBJ.results['US'].link
 
       genreSeries.value.push({
-        title: series.name,
-        id: movie.id,
+        name: series.name,
+        id: series.id,
         releaseYear: series.first_air_date.slice(0, 4),
         image: "https://image.tmdb.org/t/p/original" + series.backdrop_path,
         link: providerLink,
