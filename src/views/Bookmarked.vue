@@ -29,10 +29,7 @@
               :link="title.link" :type="title.type" :bookmarks="bookmarkedTitles" />
           </div>
         </div>
-
       </div>
-
-
     </div>
   </div>
 </template>
@@ -87,6 +84,7 @@ const bookmarkedMovies = ref([])
 async function getBookmarkedMovies() {
   watch(() => toRaw(bookmarkedTitles.value),
     async (newVal, oldVal) => {
+      bookmarkedMovies.value = []
       for (let i = 0; i < newVal['Movie'].length; i++) {
         const movieId = newVal['Movie'][i];
 
@@ -115,6 +113,7 @@ const bookmarkedSeries = ref([])
 async function getBookmarkedSeries() {
   watch(() => toRaw(bookmarkedTitles.value),
     async (newVal, oldVal) => {
+      bookmarkedSeries.value = []
       for (let i = 0; i < newVal['TV Series'].length; i++) {
         const seriesId = newVal['TV Series'][i];
 
