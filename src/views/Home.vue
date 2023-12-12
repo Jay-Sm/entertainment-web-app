@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full pl-[4rem] pr-[8.5rem] tablet:px-6 mobile:px-3 flex flex-col mt-7 mb-[3rem] gap-y-[8rem]">
+  <div class="w-full h-full pl-[4rem] pr-[8.5rem] tablet:px-6 mobile:px-3 flex flex-col mt-7 gap-y-[8rem]">
     <div>
       <div>
         <div class="flex flex-row justify-between max-w-full w-full">
@@ -159,12 +159,6 @@
         </div>
       </div>
     </div>
-
-    <a href="https://www.themoviedb.org/" target="_blank" class="flex flex-col justify-center items-center gap-y-2">
-      <p class="text-sm text-theme-light-blue2 font-semibold select-none">Powered By</p>
-      <img class="w-[10rem] select-none"
-        src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg">
-    </a>
   </div>
 </template>
 

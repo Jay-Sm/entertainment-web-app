@@ -63,7 +63,7 @@
       </div>
     </div>
 
-    <div class="w-full mt-9">
+    <div class="w-full h-full mt-9">
       <div :class="{ 'overflow-hidden': !searching }" v-on:mouseleave="searching = false"
         v-on:click="focusSearch($event); searching = true"
         class="mt-9 pr-[8.5rem] tablet:mt-0 mobile:mt-0 pl-[4rem] tablet:pl-6 tablet:pr-12 mobile:pl-6 mobile:pr-12 relative">
@@ -118,11 +118,19 @@
 
         <CreateAccount v-if="creatingAccount === true" @closeCreateAcc="creatingAccount = !creatingAccount"
           @logIn="loggingIn = !loggingIn" />
-        <div>
+        <div class="flex flex-col items-stretch">
           <router-view @logIn="loggingIn = true"></router-view>
+
+          <a href="https://www.themoviedb.org/" target="_blank" class="flex flex-col justify-center items-center gap-y-2 mt-[5rem] mb-[3rem]">
+            <p class="text-sm text-theme-light-blue2 font-semibold select-none">Powered By</p>
+            <img class="w-[10rem] select-none"
+              src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg">
+          </a>
         </div>
       </div>
     </div>
+
+
   </div>
 </template>
 
