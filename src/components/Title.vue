@@ -2,8 +2,7 @@
   <div class="title-tile">
     <Loader v-if="loading" />
 
-    <img :src="props.image" @load="loadingDone($event)"
-      class="absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover">
+    <img :src="props.image" @load="loadingDone($event)" class="title-image">
     <div v-if="!loading" class="relative z-10">{{ props.year }} &#x2022 {{ props.type }}</div>
     <div v-if="!loading" class="text-xl relative z-10 truncate">{{ props.name }}</div>
 
@@ -76,6 +75,10 @@ function loadingDone(event) {
 
 .title-tile div {
   @apply select-none
+}
+
+.title-image {
+  @apply absolute top-0 h-full right-0 w-full select-none pointer-events-none opacity-60 object-cover
 }
 
 .title-options {

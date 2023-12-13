@@ -10,7 +10,7 @@
         </button>
       </div>
 
-      <div class="flex flex-col justify-start items-center gap-y-3">
+      <div class="form-container">
         <h3 class="text-4xl font-semibold max-w-fit">Create Account</h3>
 
         <form @submit.prevent="firebaseCreateAcc" class="w-full flex flex-col gap-y-5 px-10">
@@ -27,13 +27,13 @@
               Create Account
             </button>
           </div>
-          <div class="w-full text-left">
-            <button @click="emit('closeCreateAcc'); emit('logIn')"
-              class="text-gray-600 hover:text-[#b8d4ee] transition-colors">Already have an account?</button>
+          <div class="w-full text-left form-links">
+            <button @click="emit('closeCreateAcc'); emit('logIn')">
+              Already have an account?
+            </button>
           </div>
         </form>
       </div>
-
     </div>
   </div>
 </template>
@@ -68,4 +68,6 @@ async function firebaseCreateAcc() {
 
 </script>
 
-<style></style>
+<style>
+/* Go to [Login.vue] */
+</style>

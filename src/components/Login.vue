@@ -10,7 +10,7 @@
         </button>
       </div>
 
-      <div class="flex flex-col justify-start items-center gap-y-3">
+      <div class="form-container">
         <h3 class="text-4xl font-semibold max-w-fit">Log In</h3>
 
         <form @submit.prevent="firebaseLogin" class="w-full flex flex-col gap-y-5 px-10">
@@ -23,7 +23,7 @@
             <input type="text" placeholder="Enter password" v-model="password">
           </div>
           <div class="login-checkbox">
-            <input type="checkbox">
+            <input type="checkbox" v-model="remeberMe" v-on:click="remeberMe = !remeberMe">
             <span class="checkmark"><svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                 fill="currentColor" viewBox="0 0 16 16">
                 <path
@@ -36,14 +36,13 @@
               Sign In
             </button>
           </div>
-          <div class="w-full flex flex-row justify-between">
-            <button @click="emit('closeLogIn'); emit('createAcc')"
-              class="text-gray-600 hover:text-[#b8d4ee] transition-colors">Don't have an account?</button>
-            <button class="text-gray-600 hover:text-[#b8d4ee] transition-colors">Forgot password?</button>
+          <div class="w-full flex flex-row justify-between form-links">
+            <button @click="emit('closeLogIn'); emit('createAcc')">
+              Don't have an account?
+            </button>
           </div>
         </form>
       </div>
-
     </div>
   </div>
 </template>
@@ -51,16 +50,22 @@
 <script setup>
 import { ref } from 'vue'
 import { auth } from '../firebase/firebase'
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, setPersistence, browserSessionPersistence } from "firebase/auth";
 
 const emit = defineEmits(['closeLogIn', 'createAcc'])
 
 const email = ref('')
 const password = ref('')
+const remeberMe = ref(true)
 function firebaseLogin() {
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
       const user = userCredential.user;
+
+      if (!remeberMe.value) {
+        setPersistence(auth, browserSessionPersistence)        
+      }
+
       emit('closeLogIn')
     })
     .catch((error) => {
@@ -73,8 +78,59 @@ function firebaseLogin() {
       console.error(errorMessage);
     });
 }
-
-
 </script>
 
-<style></style>
+<style>
+.login-backdrop {
+  @apply fixed top-0 left-0 w-screen h-screen z-40 flex justify-center items-center bg-black bg-opacity-60;
+}
+
+.login-container {
+  @apply h-[28.75rem] min-w-[30rem] max-w-[40rem] bg-background-dark-blue border rounded border-theme-light-blue2 top-1/4 left-[20%] z-50 p-2;
+}
+
+.form-container {
+  @apply flex flex-col justify-start items-center gap-y-3;
+}
+
+.form-links button {
+  @apply text-gray-600 hover:text-[#b8d4ee] transition-colors;
+}
+
+.login-input {
+  @apply w-full
+}
+
+.login-input input {
+  @apply w-full mt-1 py-3 pl-3 bg-transparent outline-none border border-theme-light-blue2 rounded-md;
+}
+
+.login-input button {
+  @apply w-full bg-theme-light-blue2 py-2 rounded-lg hover:opacity-80 active:opacity-70;
+}
+
+.login-checkbox {
+  @apply w-fit flex gap-x-2 justify-start items-center relative;
+}
+
+.login-checkbox input {
+  @apply absolute opacity-0 cursor-pointer h-full w-full;
+  pointer-events: all;
+}
+
+.login-checkbox span.checkmark {
+  @apply w-5 h-5 bg-theme-light-blue border border-theme-light-blue2 rounded-md cursor-pointer pointer-events-none;
+}
+
+.login-checkbox:hover input~span.checkmark {
+  @apply bg-[#222c49];
+}
+
+.login-checkbox span.checkmark svg {
+  @apply opacity-0;
+}
+
+.login-checkbox input:checked~span.checkmark svg {
+  @apply !opacity-100;
+}
+</style>
