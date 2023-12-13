@@ -50,14 +50,24 @@
             </li>
           </ul>
 
-          <button v-if="!loggedIn" @click="loggingIn = true" class="flex flex-col items-center gap-y-1" to="/login">
-            <div class="w-8 h-8 rounded-full breakpointtest"></div>
-            <p class="text-sm">Log In</p>
+          <button v-if="!loggedIn" @click="loggingIn = true" class="flex flex-col items-center" to="/login">
+            <div class="p-[0.3rem] px-[0.4rem] border-2 rounded-full">
+              <svg class="w-7 h-7 -ml-[0.2rem] min-w-max min-h-max" viewBox="0 0 512 512"
+                xmlns="http://www.w3.org/2000/svg" fill="#fff">
+                <path
+                  d="M392 80H232a56.06 56.06 0 00-56 56v104h153.37l-52.68-52.69a16 16 0 0122.62-22.62l80 80a16 16 0 010 22.62l-80 80a16 16 0 01-22.62-22.62L329.37 272H176v104c0 32.05 33.79 56 64 56h152a56.06 56.06 0 0056-56V136a56.06 56.06 0 00-56-56zM80 240a16 16 0 000 32h96v-32z" />
+              </svg>
+            </div>
           </button>
 
           <button v-else @click="firebaseLogOut()" class="flex flex-col items-center gap-y-1" to="/login">
-            <div class="w-8 h-8 rounded-full breakpointtest"></div>
-            <p class="text-sm">Log Out</p>
+            <div class="p-[0.3rem] px-[0.4rem] border-2 rounded-full">
+              <svg class="w-7 h-7 -mr-[0.2rem] min-w-max min-h-max" viewBox="0 0 512 512"
+                xmlns="http://www.w3.org/2000/svg" fill="#fff">
+                <path
+                  d="M160 256a16 16 0 0116-16h144V136c0-32-33.79-56-64-56H104a56.06 56.06 0 00-56 56v240a56.06 56.06 0 0056 56h160a56.06 56.06 0 0056-56V272H176a16 16 0 01-16-16zM459.31 244.69l-80-80a16 16 0 00-22.62 22.62L409.37 240H320v32h89.37l-52.68 52.69a16 16 0 1022.62 22.62l80-80a16 16 0 000-22.62z" />
+              </svg>
+            </div>
           </button>
         </nav>
       </div>
@@ -121,7 +131,8 @@
         <div class="flex flex-col items-stretch">
           <router-view @logIn="loggingIn = true"></router-view>
 
-          <a href="https://www.themoviedb.org/" target="_blank" class="flex flex-col justify-center items-center gap-y-2 mt-[5rem] mb-[3rem]">
+          <a href="https://www.themoviedb.org/" target="_blank"
+            class="flex flex-col max-w-fit mt-[5rem] mb-[3rem] mx-auto justify-center items-center gap-y-2">
             <p class="text-sm text-theme-light-blue2 font-semibold select-none">Powered By</p>
             <img class="w-[10rem] select-none"
               src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg">

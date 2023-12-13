@@ -26,7 +26,7 @@ body {
   @apply h-full;
 }
 
-.breakpointtest {
+/* .breakpointtest {
   @apply mobile:bg-red-500;
   @apply tablet:bg-lime-300;
   @apply small:bg-yellow-400;
@@ -35,4 +35,4 @@ body {
   @apply xl:bg-orange-500;
   @apply xxl:bg-[#f58080];
   @apply tv:bg-white;
-}
+} */

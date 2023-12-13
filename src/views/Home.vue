@@ -19,8 +19,8 @@
             @move-end="onMoveEnd">
 
             <div v-for="(title, index) in discoverMovies" :key="index">
-              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" @logIn="emit('logIn')" :name="title.name" :id="title.id"
-                :year="title.releaseYear" :image="title.image" :link="title.link" :type="title.type"
+              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" @logIn="emit('logIn')" :name="title.name"
+                :id="title.id" :year="title.releaseYear" :image="title.image" :link="title.link" :type="title.type"
                 :bookmarks="bookmarkedTitles" />
             </div>
           </Flicking>
@@ -40,8 +40,8 @@
 
         <div class="grid-popular">
           <div v-for="(title, index) in popularMovies" :key="index" :class="popularIndex(index)">
-            <Title @logIn="emit('logIn')" :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image" :link="title.link"
-              :type="title.type" :bookmarks="bookmarkedTitles" />
+            <Title @logIn="emit('logIn')" :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image"
+              :link="title.link" :type="title.type" :bookmarks="bookmarkedTitles" />
           </div>
         </div>
       </div>
@@ -59,8 +59,8 @@
 
         <div class="rated-container">
           <div v-for="(title, index) in topRatedMovies" :key="index" class="w-full">
-            <Title class="" @logIn="emit('logIn')" :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image"
-              :link="title.link" :type="title.type" :bookmarks="bookmarkedTitles" />
+            <Title class="" @logIn="emit('logIn')" :name="title.name" :id="title.id" :year="title.releaseYear"
+              :image="title.image" :link="title.link" :type="title.type" :bookmarks="bookmarkedTitles" />
           </div>
         </div>
       </div>
@@ -85,8 +85,8 @@
             @move-end="onMoveEnd">
 
             <div v-for="(title, index) in discoverSeries" :key="index">
-              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" @logIn="emit('logIn')" :name="title.name" :id="title.id"
-                :year="title.releaseYear" :image="title.image" :link="title.link" :type="title.type"
+              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" @logIn="emit('logIn')" :name="title.name"
+                :id="title.id" :year="title.releaseYear" :image="title.image" :link="title.link" :type="title.type"
                 :bookmarks="bookmarkedTitles" />
             </div>
           </Flicking>
@@ -107,8 +107,8 @@
 
         <div class="grid-popular">
           <div v-for="(title, index) in popularSeries" :key="index" :class="popularIndex(index)">
-            <Title @logIn="emit('logIn')" :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image" :link="title.link"
-              :type="title.type" :bookmarks="bookmarkedTitles" />
+            <Title @logIn="emit('logIn')" :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image"
+              :link="title.link" :type="title.type" :bookmarks="bookmarkedTitles" />
           </div>
         </div>
       </div>
@@ -126,8 +126,8 @@
 
         <div class="rated-container">
           <div v-for="(title, index) in topRatedSeries" :key="index" class="w-full">
-            <Title class="" @logIn="emit('logIn')" :name="title.name" :id="title.id" :year="title.releaseYear" :image="title.image"
-              :link="title.link" :type="title.type" :bookmarks="bookmarkedTitles" />
+            <Title class="" @logIn="emit('logIn')" :name="title.name" :id="title.id" :year="title.releaseYear"
+              :image="title.image" :link="title.link" :type="title.type" :bookmarks="bookmarkedTitles" />
           </div>
         </div>
 
@@ -151,8 +151,8 @@
             @move-end="onMoveEnd">
 
             <div v-for="(title, index) in airingToday" :key="index">
-              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" @logIn="emit('logIn')" :name="title.name" :id="title.id"
-                :year="title.releaseYear" :image="title.image" :link="title.link" :type="title.type"
+              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" @logIn="emit('logIn')" :name="title.name"
+                :id="title.id" :year="title.releaseYear" :image="title.image" :link="title.link" :type="title.type"
                 :bookmarks="bookmarkedTitles" />
             </div>
           </Flicking>
