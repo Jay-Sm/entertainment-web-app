@@ -6,16 +6,15 @@
         v-on:click="searching = false">
 
         <nav>
-          <Navigation @logIn="loggingIn = true"/>
+          <Navigation @logIn="loggingIn = true" />
         </nav>
-        
+
       </div>
     </div>
 
     <div class="w-full h-full mt-9">
       <div :class="{ 'overflow-hidden': !searching }" v-on:mouseleave="searching = false"
-        v-on:click="focusSearch($event); searching = true"
-        class="mt-9 pr-[8.5rem] tablet:mt-0 mobile:mt-0 pl-[4rem] tablet:pl-6 tablet:pr-12 mobile:pl-6 mobile:pr-12 relative">
+        v-on:click="focusSearch($event); searching = true" class="search-container">
         <div class="flex flex-row">
           <button @click="focusSearch($event)">
             <svg class="w-[2rem] h-[2rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff"
@@ -28,15 +27,15 @@
             v-on:keypress.enter="focusSearch($event); searching = true" v-model.lazy="searchText"
             v-on:focus="searching = true">
         </div>
-        <div class="search-results" :class="{ '!h-[30rem]': searching }" v-on:click="focusSearch($event)">
 
-          <div class="w-full flex flex-col items-start gap-y-5 px-[3%]">
-            <p class="w-full text-center border-b text-xl font-normal tracking-wide">Movies</p>
+        <div class="search-results" :class="{ '!h-[30rem]': searching }" v-on:click="focusSearch($event)">
+          <div class="result-section ">
+            <p>
+              Movies
+            </p>
 
             <div class="search-result">
-              <a :href="movie.link" target="_blank"
-                class="flex justify-center items-center max-w-fit my-2 gap-x-2 px-3 rounded-xl hover:bg-[#5a6a9055]"
-                v-for="(movie, index) in movieSearch" :key="index">
+              <a :href="movie.link" target="_blank" v-for="(movie, index) in movieSearch" :key="index">
                 <p class="truncate">{{ movie.title }}</p>
                 <p>&#x2022</p>
                 <p>{{ movie.releaseYear }}</p>
@@ -44,13 +43,13 @@
             </div>
           </div>
 
-          <div class="w-full flex flex-col items-start gap-y-5 px-[3%]">
-            <p class="w-full text-center border-b text-xl font-normal tracking-wide">TV</p>
+          <div class="result-section">
+            <p>
+              TV
+            </p>
 
             <div class="search-result">
-              <a :href="series.link" target="_blank"
-                class="flex justify-center items-center max-w-fit my-2 gap-x-2 px-3 rounded-xl hover:bg-[#5a6a9055]"
-                v-for="(series, index) in seriesSearch" :key="index">
+              <a :href="series.link" target="_blank" v-for="(series, index) in seriesSearch" :key="index">
                 <p class="truncate">{{ series.title }}</p>
                 <p>&#x2022</p>
                 <p>{{ series.releaseYear }}</p>
@@ -67,7 +66,7 @@
 
         <CreateAccount v-if="creatingAccount === true" @closeCreateAcc="creatingAccount = !creatingAccount"
           @logIn="loggingIn = !loggingIn" />
-          
+
         <div class="flex flex-col items-stretch">
           <router-view @logIn="loggingIn = true"></router-view>
 
@@ -80,8 +79,6 @@
         </div>
       </div>
     </div>
-
-
   </div>
 </template>
 
@@ -226,6 +223,9 @@ watch(() => searchText.value, () => {
 </script>
 
 <style>
+.search-container {
+  @apply mt-9 pr-[8.5rem] tablet:mt-0 mobile:mt-0 pl-[4rem] tablet:pl-6 tablet:pr-12 mobile:pl-6 mobile:pr-12 relative;
+}
 
 .search-input {
   @apply w-full bg-transparent ml-5 pb-2 font-light text-2xl placeholder:font-light placeholder:text-2xl placeholder:opacity-70;
@@ -238,7 +238,20 @@ watch(() => searchText.value, () => {
   @apply flex flex-row py-3 px-5;
 }
 
+.result-section {
+  @apply w-full flex flex-col items-start gap-y-5 px-[3%];
+}
+
+.result-section>p {
+  @apply w-full text-center border-b text-xl font-normal tracking-wide
+}
+
 .search-result {
-  @apply h-full grid grid-cols-1 grid-rows-[repeat(8,1fr)];
+  @apply h-full grid grid-cols-1;
+  grid-template-rows: repeat(8, 1fr);
+}
+
+.search-result a {
+  @apply flex justify-center items-center max-w-fit my-2 gap-x-2 px-3 rounded-xl hover:bg-[#5a6a9055]
 }
 </style>
