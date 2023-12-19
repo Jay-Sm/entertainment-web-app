@@ -70,12 +70,13 @@
         <div class="flex flex-col items-stretch">
           <router-view @logIn="loggingIn = true"></router-view>
 
-          <a href="https://www.themoviedb.org/" target="_blank"
-            class="flex flex-col max-w-fit mt-[5rem] mb-[3rem] mx-auto justify-center items-center gap-y-2">
-            <p class="text-sm text-theme-light-blue2 font-semibold select-none">Powered By</p>
+          <a href="https://www.themoviedb.org/" target="_blank" class="attribution">
+            <p>Powered By</p>
+
             <img class="w-[10rem] select-none"
               src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg">
           </a>
+
         </div>
       </div>
     </div>
@@ -223,6 +224,14 @@ watch(() => searchText.value, () => {
 </script>
 
 <style>
+.attribution {
+  @apply flex flex-col max-w-fit mt-[5rem] mb-[3rem] mx-auto justify-center items-center gap-y-2;
+}
+
+.attribution p {
+  @apply text-sm text-theme-light-blue2 font-semibold select-none
+}
+
 .search-container {
   @apply mt-9 pr-[8.5rem] tablet:mt-0 mobile:mt-0 pl-[4rem] tablet:pl-6 tablet:pr-12 mobile:pl-6 mobile:pr-12 relative;
 }
