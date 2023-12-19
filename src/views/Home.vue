@@ -1,14 +1,13 @@
 <template>
-  <div class="w-full h-full pl-[4rem] pr-[8.5rem] tablet:px-6 mobile:px-3 flex flex-col mt-7 gap-y-[8rem]">
+  <div class="home-container">
     <div>
       <div>
-        <div class="flex flex-row justify-between max-w-full w-full">
-          <h2 class="text-3xl flex flex-row items-end gap-x-4">
+        <div class="title-container">
+          <h2 class="section-title">
             Discover
             <div class="label-movie">MOVIE</div>
           </h2>
-
-          <router-link to="/movie" class="text-theme-light-blue2 font-medium text-[0.8rem] hover:underline">
+          <router-link to="/movie" class="">
             SEE MORE
           </router-link>
         </div>
@@ -19,7 +18,7 @@
             @move-end="onMoveEnd">
 
             <div v-for="(title, index) in discoverMovies" :key="index">
-              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" @logIn="emit('logIn')" :name="title.name"
+              <Title class="" @logIn="emit('logIn')" :name="title.name"
                 :id="title.id" :year="title.releaseYear" :image="title.image" :link="title.link" :type="title.type"
                 :bookmarks="bookmarkedTitles" />
             </div>
@@ -28,12 +27,12 @@
       </div>
 
       <div class="mt-12">
-        <div class="flex flex-row justify-between max-w-full w-full">
-          <h2 class="text-3xl flex flex-row items-end gap-x-4">
+        <div class="title-container">
+          <h2 class="section-title">
             Popular
             <div class="label-movie">MOVIE</div>
           </h2>
-          <router-link to="/movie" class="text-theme-light-blue2 font-medium text-[0.8rem] hover:underline">
+          <router-link to="/movie" class="">
             SEE MORE
           </router-link>
         </div>
@@ -47,19 +46,19 @@
       </div>
 
       <div class="mt-12">
-        <div class="flex flex-row justify-between max-w-full w-full">
-          <h2 class="text-3xl flex flex-row items-end gap-x-4">
+        <div class="title-container">
+          <h2 class="section-title">
             Top Rated
             <div class="label-movie">MOVIE</div>
           </h2>
-          <router-link to="/movie" class="text-theme-light-blue2 font-medium text-[0.8rem] hover:underline">
+          <router-link to="/movie" class="">
             SEE MORE
           </router-link>
         </div>
 
-        <div class="rated-container">
+        <div class="grid-rated">
           <div v-for="(title, index) in topRatedMovies" :key="index" class="w-full">
-            <Title class="" @logIn="emit('logIn')" :name="title.name" :id="title.id" :year="title.releaseYear"
+            <Title @logIn="emit('logIn')" :name="title.name" :id="title.id" :year="title.releaseYear"
               :image="title.image" :link="title.link" :type="title.type" :bookmarks="bookmarkedTitles" />
           </div>
         </div>
@@ -68,13 +67,13 @@
 
     <div>
       <div>
-        <div class="flex flex-row justify-between max-w-full w-full">
-          <h2 class="text-3xl flex flex-row items-end gap-x-4">
+        <div class="title-container">
+          <h2 class="section-title">
             Discover
             <div class="label-tv">TV SERIES</div>
           </h2>
 
-          <router-link to="/tv" class="text-theme-light-blue2 font-medium text-[0.8rem] hover:underline">
+          <router-link to="/tv" class="">
             SEE MORE
           </router-link>
         </div>
@@ -85,7 +84,7 @@
             @move-end="onMoveEnd">
 
             <div v-for="(title, index) in discoverSeries" :key="index">
-              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" @logIn="emit('logIn')" :name="title.name"
+              <Title class="" @logIn="emit('logIn')" :name="title.name"
                 :id="title.id" :year="title.releaseYear" :image="title.image" :link="title.link" :type="title.type"
                 :bookmarks="bookmarkedTitles" />
             </div>
@@ -94,13 +93,13 @@
       </div>
 
       <div class="mt-12">
-        <div class="flex flex-row justify-between max-w-full w-full">
-          <h2 class="text-3xl flex flex-row items-end gap-x-4">
+        <div class="title-container">
+          <h2 class="section-title">
             Popular
             <div class="label-tv">TV SERIES</div>
           </h2>
 
-          <router-link to="/tv" class="text-theme-light-blue2 font-medium text-[0.8rem] hover:underline">
+          <router-link to="/tv" class="">
             SEE MORE
           </router-link>
         </div>
@@ -114,19 +113,19 @@
       </div>
 
       <div class="mt-12">
-        <div class="flex flex-row justify-between max-w-full w-full">
-          <h2 class="text-3xl flex flex-row items-end gap-x-4">
+        <div class="title-container">
+          <h2 class="section-title">
             Top Rated
             <div class="label-tv">TV SERIES</div>
           </h2>
-          <router-link to="/tv" class="text-theme-light-blue2 font-medium text-[0.8rem] hover:underline">
+          <router-link to="/tv" class="">
             SEE MORE
           </router-link>
         </div>
 
-        <div class="rated-container">
+        <div class="grid-rated">
           <div v-for="(title, index) in topRatedSeries" :key="index" class="w-full">
-            <Title class="" @logIn="emit('logIn')" :name="title.name" :id="title.id" :year="title.releaseYear"
+            <Title @logIn="emit('logIn')" :name="title.name" :id="title.id" :year="title.releaseYear"
               :image="title.image" :link="title.link" :type="title.type" :bookmarks="bookmarkedTitles" />
           </div>
         </div>
@@ -134,13 +133,13 @@
       </div>
 
       <div class="mt-12">
-        <div class="flex flex-row justify-between max-w-full w-full">
-          <h2 class="text-3xl flex flex-row items-end gap-x-4">
+        <div class="title-container">
+          <h2 class="section-title">
             Airing Today
             <div class="label-tv">TV SERIES</div>
           </h2>
 
-          <router-link to="/tv" class="text-theme-light-blue2 font-medium text-[0.8rem] hover:underline">
+          <router-link to="/tv" class="">
             SEE MORE
           </router-link>
         </div>
@@ -151,7 +150,7 @@
             @move-end="onMoveEnd">
 
             <div v-for="(title, index) in airingToday" :key="index">
-              <Title class="!h-full !w-[27rem] mobile:!w-[20rem] ml-10" @logIn="emit('logIn')" :name="title.name"
+              <Title class="" @logIn="emit('logIn')" :name="title.name"
                 :id="title.id" :year="title.releaseYear" :image="title.image" :link="title.link" :type="title.type"
                 :bookmarks="bookmarkedTitles" />
             </div>
@@ -411,4 +410,83 @@ getAiring()
 
 </script>
 
-<style></style>
+<style>
+.home-container {
+  @apply w-full h-full pl-[4rem] pr-[8.5rem] tablet:px-6 mobile:px-3 flex flex-col mt-7 gap-y-[8rem]
+}
+
+.label-movie {
+  @apply border-2 max-w-fit h-fit text-[0.6rem] leading-3 font-medium py-[0.2rem] px-[0.6rem] rounded-lg select-none;
+}
+
+.label-tv {
+  @apply border-2 max-w-fit h-fit bg-white text-background-dark-blue text-[0.6rem] leading-3 font-semibold py-[0.2rem] px-[0.6rem] rounded-lg select-none;
+}
+
+.title-container {
+  @apply flex flex-row justify-between max-w-full w-full
+}
+
+.section-title {
+  @apply text-3xl flex flex-row items-end gap-x-4;
+}
+
+h2.section-title~a {
+  @apply text-theme-light-blue2 font-medium text-[0.8rem] hover:underline
+}
+
+.flicking-viewport .title-tile {
+  @apply !h-full !w-[27rem] mobile:!w-[20rem] ml-10
+}
+
+
+.grid-rated {
+  @apply mt-5 w-full flex flex-row gap-x-4 tablet:flex-col tablet:gap-y-4 mobile:flex-col mobile:gap-y-4;
+}
+
+.grid-popular {
+  @apply mt-5 grid grid-cols-4;
+  grid-template-rows: repeat(2, 14rem);
+  gap: 1rem;
+  grid-template-areas:
+    "tile1 tile2 tile3 tile3"
+    "tile4 tile4 tile5 tile6";
+}
+
+@media (max-width: 899px) {
+  .grid-popular {
+    @apply grid-cols-2;
+    grid-template-rows: repeat(3, 14.5rem);
+    grid-template-areas:
+      "tile1 tile2"
+      "tile3 tile4"
+      "tile5 tile6";
+  }
+}
+
+.tile1 {
+  grid-area: tile1;
+}
+
+.tile2 {
+  grid-area: tile2;
+}
+
+.tile3 {
+  grid-area: tile3;
+}
+
+.tile4 {
+  grid-area: tile4;
+}
+
+.tile5 {
+  grid-area: tile5;
+}
+
+.tile6 {
+  grid-area: tile6;
+}
+
+
+</style>
