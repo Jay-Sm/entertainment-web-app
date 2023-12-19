@@ -54,8 +54,10 @@ async function firebaseCreateAcc() {
       const user = userCredential.user;
 
       setDoc(doc(db, "user_bookmarks", user.uid), {
+        bookmarked_movies: [], bookmarked_series: [],
       });
 
+      emit('closeCreateAcc')
     })
     .catch((error) => {
       const errorCode = error.code;
