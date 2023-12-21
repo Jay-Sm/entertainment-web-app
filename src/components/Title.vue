@@ -7,7 +7,7 @@
     <div v-if="!loading" class="text-xl relative z-10 truncate">{{ props.name }}</div>
 
     <div class="title-options" v-if="!loading">
-      <div v-if="props.bookmarks !== undefined">
+      <div v-if="props.bookmarks[props.type] !== undefined">
         <button v-if="toRaw(props.bookmarks[props.type]).includes(props.id)"
           @click="removeBookmark(props.id, props.type);">
           <svg class="w-[1.1rem] h-[1.1rem]" xmlns="http://www.w3.org/2000/svg" width="16" height="16"

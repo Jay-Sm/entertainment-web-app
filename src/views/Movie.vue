@@ -57,7 +57,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { db, auth } from "../firebase/firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
@@ -74,6 +74,7 @@ onAuthStateChanged(auth, async (user) => {
 
     onSnapshot(userBookmarkDoc, (doc) => {
       const data = doc.data()
+
       updateBookmarked({ "Movie": data['bookmarked_movies'], "TV Series": data['bookmarked_series'] })
     });
   }
